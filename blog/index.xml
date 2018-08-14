@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Blog on Yuntong Zhang</title>
+    <link>https://www.yuntong.me/blog/</link>
+    <description>Recent content in Blog on Yuntong Zhang</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <lastBuildDate>Sun, 05 Aug 2018 21:06:45 +0800</lastBuildDate>
+    
+	<atom:link href="https://www.yuntong.me/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Why blog?</title>
+      <link>https://www.yuntong.me/blog/why-blog/</link>
+      <pubDate>Sun, 05 Aug 2018 21:06:45 +0800</pubDate>
+      
+      <guid>https://www.yuntong.me/blog/why-blog/</guid>
+      <description>It has been one year since I started university and my programming journey. Programming is super enjoyable for me, and I wished I could have started learning programming earlier.
+Despite being enjoyable, there have also been many hair-pulling moments when I was learning how to program at the beginning. How to implement a BFS, how to write code in functional style, how to quit vim&amp;hellip; Believe me, all of these seem easy but they are indeed challenging and frustrating for newbies.</description>
+    </item>
+    
+  </channel>
+</rss>

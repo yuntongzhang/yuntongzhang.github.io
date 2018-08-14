@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://www.yuntong.me/projects/ramsay123/</loc>
+    <lastmod>2018-08-14T11:23:46+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/about/</loc>
+    <lastmod>2018-08-05T21:26:11+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/blog/why-blog/</loc>
+    <lastmod>2018-08-05T21:06:45+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/license/</loc>
+    <lastmod>2018-08-05T19:54:59+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/home/</loc>
+    <lastmod>2018-08-05T19:52:39+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/blog/</loc>
+    <lastmod>2018-08-05T21:06:45+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/tags/life/</loc>
+    <lastmod>2018-08-05T21:26:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/projects/</loc>
+    <lastmod>2018-08-14T11:23:46+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/tags/python/</loc>
+    <lastmod>2018-08-14T11:23:46+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/tags/</loc>
+    <lastmod>2018-08-05T21:26:11+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/tags/telegram/</loc>
+    <lastmod>2018-08-14T11:23:46+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.yuntong.me/</loc>
+    <lastmod>2018-08-14T11:23:46+08:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
