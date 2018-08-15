@@ -1,1 +1,7 @@
-# yuntongzhang.github.io
+# Github Pages
+
+This repo contains the static files for my personal blogging site.
+
+The site is built with Hugo, hosted with Github Pages.
+
+Visit my site at https://www.yuntong.me.
