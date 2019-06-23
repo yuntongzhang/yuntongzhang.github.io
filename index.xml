@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Yuntong Zhang</title>
-    <link>https://www.yuntong.me/</link>
+    <link>https://www.yuntongzhang.com/</link>
     <description>Recent content on Yuntong Zhang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Tue, 14 Aug 2018 11:23:46 +0800</lastBuildDate>
     
-	<atom:link href="https://www.yuntong.me/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.yuntongzhang.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Telegram bot - Ramsay123</title>
-      <link>https://www.yuntong.me/projects/ramsay123/</link>
+      <link>https://www.yuntongzhang.com/projects/ramsay123/</link>
       <pubDate>Tue, 14 Aug 2018 11:23:46 +0800</pubDate>
       
-      <guid>https://www.yuntong.me/projects/ramsay123/</guid>
+      <guid>https://www.yuntongzhang.com/projects/ramsay123/</guid>
       <description>This project can be found on Github and Devpost.
 Background As college students, eating out may not always be the viable option to enjoy a scrumptious yet healthy and affordable meal. This bot aims to introduce and recommend dishes tailored to user&amp;rsquo;s dietary preference, so that users can discover new food to prepare in their own kitchen, or head to the nearest restaurants and expand their palate.
 Introduction Ramsay123 is a telegram bot, which interacts with users via customized keyboards.</description>
@@ -24,10 +24,10 @@ Introduction Ramsay123 is a telegram bot, which interacts with users via customi
     
     <item>
       <title>About Me</title>
-      <link>https://www.yuntong.me/about/</link>
+      <link>https://www.yuntongzhang.com/about/</link>
       <pubDate>Sun, 05 Aug 2018 21:26:11 +0800</pubDate>
       
-      <guid>https://www.yuntong.me/about/</guid>
+      <guid>https://www.yuntongzhang.com/about/</guid>
       <description>Hello! I am an aspiring software developer, university student studying computer science and economics, and an enthusiastic learner in information security and natural sciences.
 I enjoy learning new technology and use my expertise to solve problems. Beyond academics, I am also interested in trading despite that I am still a newbie in the field. I spent most of my free time playing basketball, skating and reading.
 My Life Story Early Days (well not that early) I was born in China and has spent the first 15 years of my life in Tianjin, a beautiful international port city on the east coast of China.</description>
@@ -35,20 +35,20 @@ My Life Story Early Days (well not that early) I was born in China and has spent
     
     <item>
       <title>Why blog?</title>
-      <link>https://www.yuntong.me/blog/why-blog/</link>
+      <link>https://www.yuntongzhang.com/blog/why-blog/</link>
       <pubDate>Sun, 05 Aug 2018 21:06:45 +0800</pubDate>
       
-      <guid>https://www.yuntong.me/blog/why-blog/</guid>
+      <guid>https://www.yuntongzhang.com/blog/why-blog/</guid>
       <description>It has been one year since I started university and my programming journey. Programming is super enjoyable for me, and I wished I could have started learning programming earlier.
 Despite being enjoyable, there have also been many hair-pulling moments when I was learning how to program at the beginning. How to implement a BFS, how to write code in functional style, how to quit vim&amp;hellip; Believe me, all of these seem easy but they are indeed challenging and frustrating for newbies.</description>
     </item>
     
     <item>
       <title>License</title>
-      <link>https://www.yuntong.me/license/</link>
+      <link>https://www.yuntongzhang.com/license/</link>
       <pubDate>Sun, 05 Aug 2018 19:54:59 +0800</pubDate>
       
-      <guid>https://www.yuntong.me/license/</guid>
+      <guid>https://www.yuntongzhang.com/license/</guid>
       <description>The MIT License (MIT)
 Copyright &amp;copy; 2018 Yuntong Zhang ang.unong@gmail.com
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &amp;ldquo;Software&amp;rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</description>
@@ -56,10 +56,10 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
     
     <item>
       <title>Home</title>
-      <link>https://www.yuntong.me/home/</link>
+      <link>https://www.yuntongzhang.com/home/</link>
       <pubDate>Sun, 05 Aug 2018 19:52:39 +0800</pubDate>
       
-      <guid>https://www.yuntong.me/home/</guid>
+      <guid>https://www.yuntongzhang.com/home/</guid>
       <description>Year 2 CS Undergraduate Student @ National University of Singapore.
 Welcome to my site! Here are some of my blogs:</description>
     </item>

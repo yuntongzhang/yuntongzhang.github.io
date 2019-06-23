@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Life on Yuntong Zhang</title>
-    <link>https://www.yuntong.me/tags/life/</link>
+    <link>https://www.yuntongzhang.com/tags/life/</link>
     <description>Recent content in Life on Yuntong Zhang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Sun, 05 Aug 2018 21:26:11 +0800</lastBuildDate>
     
-	<atom:link href="https://www.yuntong.me/tags/life/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.yuntongzhang.com/tags/life/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>About Me</title>
-      <link>https://www.yuntong.me/about/</link>
+      <link>https://www.yuntongzhang.com/about/</link>
       <pubDate>Sun, 05 Aug 2018 21:26:11 +0800</pubDate>
       
-      <guid>https://www.yuntong.me/about/</guid>
+      <guid>https://www.yuntongzhang.com/about/</guid>
       <description>Hello! I am an aspiring software developer, university student studying computer science and economics, and an enthusiastic learner in information security and natural sciences.
 I enjoy learning new technology and use my expertise to solve problems. Beyond academics, I am also interested in trading despite that I am still a newbie in the field. I spent most of my free time playing basketball, skating and reading.
 My Life Story Early Days (well not that early) I was born in China and has spent the first 15 years of my life in Tianjin, a beautiful international port city on the east coast of China.</description>

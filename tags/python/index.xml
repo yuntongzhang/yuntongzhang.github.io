@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Python on Yuntong Zhang</title>
-    <link>https://www.yuntong.me/tags/python/</link>
+    <link>https://www.yuntongzhang.com/tags/python/</link>
     <description>Recent content in Python on Yuntong Zhang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
     <lastBuildDate>Tue, 14 Aug 2018 11:23:46 +0800</lastBuildDate>
     
-	<atom:link href="https://www.yuntong.me/tags/python/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.yuntongzhang.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Telegram bot - Ramsay123</title>
-      <link>https://www.yuntong.me/projects/ramsay123/</link>
+      <link>https://www.yuntongzhang.com/projects/ramsay123/</link>
       <pubDate>Tue, 14 Aug 2018 11:23:46 +0800</pubDate>
       
-      <guid>https://www.yuntong.me/projects/ramsay123/</guid>
+      <guid>https://www.yuntongzhang.com/projects/ramsay123/</guid>
       <description>This project can be found on Github and Devpost.
 Background As college students, eating out may not always be the viable option to enjoy a scrumptious yet healthy and affordable meal. This bot aims to introduce and recommend dishes tailored to user&amp;rsquo;s dietary preference, so that users can discover new food to prepare in their own kitchen, or head to the nearest restaurants and expand their palate.
 Introduction Ramsay123 is a telegram bot, which interacts with users via customized keyboards.</description>
