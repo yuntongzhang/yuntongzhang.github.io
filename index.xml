@@ -6,20 +6,18 @@
     <description>Recent content on Yuntong Zhang</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-US</language>
-    <lastBuildDate>Tue, 14 Aug 2018 11:23:46 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 12 Dec 2019 18:08:56 +0800</lastBuildDate>
     
 	<atom:link href="https://www.yuntongzhang.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Telegram bot - Ramsay123</title>
-      <link>https://www.yuntongzhang.com/projects/ramsay123/</link>
-      <pubDate>Tue, 14 Aug 2018 11:23:46 +0800</pubDate>
+      <title>Projects</title>
+      <link>https://www.yuntongzhang.com/projects/</link>
+      <pubDate>Thu, 12 Dec 2019 18:08:56 +0800</pubDate>
       
-      <guid>https://www.yuntongzhang.com/projects/ramsay123/</guid>
-      <description>This project can be found on Github and Devpost.
-Background As college students, eating out may not always be the viable option to enjoy a scrumptious yet healthy and affordable meal. This bot aims to introduce and recommend dishes tailored to user&amp;rsquo;s dietary preference, so that users can discover new food to prepare in their own kitchen, or head to the nearest restaurants and expand their palate.
-Introduction Ramsay123 is a telegram bot, which interacts with users via customized keyboards.</description>
+      <guid>https://www.yuntongzhang.com/projects/</guid>
+      <description>Research Projects Investigating Memory/Type Errors for Real World Programs (Aug 2019 - Present)  UROP Project in NUS. Working on the LowFat bounds checker.  Improving Automatic Speech Recognition (ASR) system for Transcribing High School Lectures (Sep 2015 - Sep 2016)  Attachment project in A*STAR, under Dr. Lim Boon Pang. By making changes to the Deep Neural Network (DNN) acoustic model, we improved the ASR system towards captioning Singlish lectures in classroom environment.</description>
     </item>
     
     <item>
@@ -28,9 +26,10 @@ Introduction Ramsay123 is a telegram bot, which interacts with users via customi
       <pubDate>Sun, 05 Aug 2018 21:26:11 +0800</pubDate>
       
       <guid>https://www.yuntongzhang.com/about/</guid>
-      <description>Hello! I am an aspiring software developer, university student studying computer science and economics, and an enthusiastic learner in information security and natural sciences.
-I enjoy learning new technology and use my expertise to solve problems. Beyond academics, I am also interested in trading despite that I am still a newbie in the field. I spent most of my free time playing basketball, skating and reading.
-My Life Story Early Days (well not that early) I was born in China and has spent the first 15 years of my life in Tianjin, a beautiful international port city on the east coast of China.</description>
+      <description>Hello! I am an undergraduate student majoring in computer science, interested in programming languages, systems, security and software engineering.
+You can get a copy of my CV here.
+Beyond tech, I am also interested in economics, history and Chinese calligraphy.
+My Life So Far I was born in China and has spent the first 15 years of my life in Tianjin, a beautiful international port city on the east coast of China.</description>
     </item>
     
     <item>
@@ -50,7 +49,7 @@ Despite being enjoyable, there have also been many hair-pulling moments when I w
       
       <guid>https://www.yuntongzhang.com/license/</guid>
       <description>The MIT License (MIT)
-Copyright &amp;copy; 2018 Yuntong Zhang ang.unong@gmail.com
+Copyright &amp;copy; 2020 Yuntong Zhang ang.unong@gmail.com
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &amp;ldquo;Software&amp;rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</description>
     </item>
     
@@ -60,8 +59,9 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
       <pubDate>Sun, 05 Aug 2018 19:52:39 +0800</pubDate>
       
       <guid>https://www.yuntongzhang.com/home/</guid>
-      <description>Year 2 CS Undergraduate Student @ National University of Singapore.
-Welcome to my site! Here are some of my blogs:</description>
+      <description>CS Undergraduate Student @ National University of Singapore.
+Welcome to my site!
+I keep some of my projects information here, and occasionally update blog posts. Here are some of my blogs:</description>
     </item>
     
   </channel>
