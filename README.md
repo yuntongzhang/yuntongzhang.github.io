@@ -1,6 +1,6 @@
 # Github Pages
 
-This repo contains the static files for my personal blogging site.
+This repo contains the static files for my notes site.
 
 The site is built with Hugo, hosted with Github Pages.
 
