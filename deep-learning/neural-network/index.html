@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.72.0" />
+  <title>Neural Network &middot; Remarques</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.302c42cf8d8975f02af310fb97ffc8a81dafcaefa1589c91894c154bb7f7ff43.css" integrity="sha256-MCxCz42JdfAq8xD7l//IqB2vyu&#43;hWJyRiUwVS7f3/0M=" media="screen" title="default">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+
+<body>
+  <nav style="margin-top: 1%;">
+  
+  <a href="https://example.org"><span class='homepage'>⌂</span>&nbsp;Homepage</a>
+  
+  
+  
+  <hr />
+</nav>
+
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#main-steps-for-building-a-neural-network">Main steps for building a Neural Network</a></li>
+    <li><a href="#activation-function-choices">Activation function choices</a>
+      <ul>
+        <li><a href="#tanh">tanh</a></li>
+        <li><a href="#relu">ReLU</a></li>
+        <li><a href="#leaky-relu">Leaky-ReLU</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  <h1 id="neural-network">Neural Network</h1>
+<h2 id="main-steps-for-building-a-neural-network">Main steps for building a Neural Network</h2>
+<ol>
+<li>Define the model structure (# of input units, # of hidden units, etc.).</li>
+<li>Initialize the model&rsquo;s parameters / Define hyperparameters.</li>
+<li>Loop:
+<ul>
+<li>Implement forward propagation</li>
+<li>Compute loss</li>
+<li>Implement backward propagation to get the gradients</li>
+<li>Update parameters (gradient decent)</li>
+</ul>
+</li>
+</ol>
+<p>Often times, the steps are built separately and integrated together later on.</p>
+<h2 id="activation-function-choices">Activation function choices</h2>
+<p>Apart from the sigmoid activation function, there are a few more other choices.</p>
+<h3 id="tanh">tanh</h3>
+<p>The hyperbolic tangent function (tanh) is represented as the following:</p>
+<p>$$tanh(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}}$$</p>
+<p>Since the value of tanh is between -1 and 1, the output value will have a mean closer to 0 (sigmoid output has mean close to 0.5). This makes the training in next layer easier, and thus tanh is <strong>always better</strong> than sigmoid (except for being output layer in binary classification tasks). For binary classification tasks output layer, it is still better to use sigmoid because we want the output to be between 0 and 1.</p>
+<p>Both sigmoid and tanh has one disadvantage: when z becomes very big or very small, the gradient becomes very small, resulting in slow progress in gradient decent.</p>
+<h3 id="relu">ReLU</h3>
+<p>The rectified linear unit (ReLU) activation function has the following representation:</p>
+<p>$$g(z) = max(0,z) =\begin{cases} 0, &amp; z \leq 0 \\ z, &amp; z &gt; 0 \end{cases}$$</p>
+<p>which corresponds to the following graph:</p>
+<p><img src="/deep-learning/relu.png" alt="ReLU graph" width="40%" /></p>
+<p>When z is greater than 0, the gradient of ReLU is always 1, which makes gradient decent converges faster than sigmoid and tanh. ReLU is often <strong>used as default</strong> in practice.</p>
+<h3 id="leaky-relu">Leaky-ReLU</h3>
+<p>$$g(z) = max(0,z) =\begin{cases} \alpha z, &amp; z \leq 0 \\ z, &amp; z &gt; 0 \end{cases}$$</p>
+<p><img src="/deep-learning/leaky-relu.png" alt="Leaky-ReLU graph" width="40%" /></p>
+<p>Here, $\alpha$ is a small constant to preserve the negative inputs.</p>
+
+  </main>
+  <footer>
+    <hr />
+    <p style="font-size:20px">Last modification: 2020-07-12 at 11:15</p>
+<p style="font-size:18px;font-family:Georgia,'Times New Roman','KaiTi','楷体',STKaiti,'华文楷体',serif">
+    | 书山有路勤为径，学海无涯苦作舟。
+</p>
+  </footer>
+</body>
+</html>

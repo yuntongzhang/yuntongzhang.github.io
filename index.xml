@@ -1,67 +1,137 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Yuntong Zhang</title>
-    <link>https://www.yuntongzhang.com/</link>
-    <description>Recent content on Yuntong Zhang</description>
+    <title>Remarques</title>
+    <link>https://example.org/</link>
+    <description>Recent content on Remarques</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <lastBuildDate>Thu, 12 Dec 2019 18:08:56 +0800</lastBuildDate>
+    <language>en</language>
+    <lastBuildDate>Tue, 02 Jun 2020 23:17:01 +0800</lastBuildDate>
     
-	<atom:link href="https://www.yuntongzhang.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://example.org/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Projects</title>
-      <link>https://www.yuntongzhang.com/projects/</link>
-      <pubDate>Thu, 12 Dec 2019 18:08:56 +0800</pubDate>
+      <title>Learning From Multiple Tasks</title>
+      <link>https://example.org/deep-learning/learning-from-multiple-tasks/</link>
+      <pubDate>Mon, 13 Jul 2020 10:18:30 +0800</pubDate>
       
-      <guid>https://www.yuntongzhang.com/projects/</guid>
-      <description>Research Projects Investigating Memory/Type Errors for Real World Programs (Aug 2019 - Present)  UROP Project in NUS. Working on the LowFat bounds checker.  Improving Automatic Speech Recognition (ASR) system for Transcribing High School Lectures (Sep 2015 - Sep 2016)  Attachment project in A*STAR, under Dr. Lim Boon Pang. By making changes to the Deep Neural Network (DNN) acoustic model, we improved the ASR system towards captioning Singlish lectures in classroom environment.</description>
+      <guid>https://example.org/deep-learning/learning-from-multiple-tasks/</guid>
+      <description>Learning from Multiple Tasks Transfer learning Make use of a trained neural network on another task.
+If there are small amount of data for the new task, fix the trained parameters in the earlier layers, and re-initialize the parameters of the last few layers in the trained network.
+If there are more data for the new task, can choose to re-train the entire network. If re-train the entire network, the previous trianing is called pre-training, and the new training is called fine-tuning.</description>
     </item>
     
     <item>
-      <title>About Me</title>
-      <link>https://www.yuntongzhang.com/about/</link>
-      <pubDate>Sun, 05 Aug 2018 21:26:11 +0800</pubDate>
+      <title>Mismatched Training and Dev/Test Set</title>
+      <link>https://example.org/deep-learning/mismatched-training-and-devtest-set/</link>
+      <pubDate>Mon, 13 Jul 2020 09:20:51 +0800</pubDate>
       
-      <guid>https://www.yuntongzhang.com/about/</guid>
-      <description>Hello! I am an undergraduate student majoring in computer science, interested in programming languages, systems, security and software engineering.
-You can get a copy of my CV here.
-Beyond tech, I am also interested in economics, history and Chinese calligraphy.
-My Life So Far I was born in China and has spent the first 15 years of my life in Tianjin, a beautiful international port city on the east coast of China.</description>
+      <guid>https://example.org/deep-learning/mismatched-training-and-devtest-set/</guid>
+      <description>Mismatched Training and Dev/Test Set The problem Sometimes, there are not enough data with the same distribution as dev/test set for us to use in training. Training data may then be obtained from other sources, but there is a potential issue of data distribution mismatch between training set and dev/test set.
+Bias Variance analysis when mismatched Apart from the avoidable bias problem and the variance problem, we now have an additional data mismatch problem.</description>
     </item>
     
     <item>
-      <title>Why blog?</title>
-      <link>https://www.yuntongzhang.com/blog/why-blog/</link>
-      <pubDate>Sun, 05 Aug 2018 21:06:45 +0800</pubDate>
+      <title>Methods To Speed Up Training</title>
+      <link>https://example.org/deep-learning/methods-to-speed-up-training/</link>
+      <pubDate>Sun, 12 Jul 2020 18:26:40 +0800</pubDate>
       
-      <guid>https://www.yuntongzhang.com/blog/why-blog/</guid>
-      <description>It has been one year since I started university and my programming journey. Programming is super enjoyable for me, and I wished I could have started learning programming earlier.
-Despite being enjoyable, there have also been many hair-pulling moments when I was learning how to program at the beginning. How to implement a BFS, how to write code in functional style, how to quit vim&amp;hellip; Believe me, all of these seem easy but they are indeed challenging and frustrating for newbies.</description>
+      <guid>https://example.org/deep-learning/methods-to-speed-up-training/</guid>
+      <description>Methods to Speed up Training Input normalization Performing input normalization on one sample:
+$$\bar{x} = \frac1m \sum_{i=1}^m x^{(i)}$$ $$x^{(i)} := x^{(i)} - \bar{x}$$ $$\sigma^2 = \frac1m \sum_{i=1}^m (x^{(i)})^2 $$ $$x^{(i)} := \frac{x^{(i)}}{\sigma^2}$$
+Weight initialization In neural network, weighs need to be initialized randomly to break symmetry, and also need to be small to hit the region of large gradients in the activation functions.
+For tanh activation function, use Xavier initialization:</description>
     </item>
     
     <item>
-      <title>License</title>
-      <link>https://www.yuntongzhang.com/license/</link>
-      <pubDate>Sun, 05 Aug 2018 19:54:59 +0800</pubDate>
+      <title>Bias and Variance</title>
+      <link>https://example.org/deep-learning/bias-and-variance/</link>
+      <pubDate>Sun, 12 Jul 2020 14:56:05 +0800</pubDate>
       
-      <guid>https://www.yuntongzhang.com/license/</guid>
-      <description>The MIT License (MIT)
-Copyright &amp;copy; 2020 Yuntong Zhang ang.unong@gmail.com
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &amp;ldquo;Software&amp;rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</description>
+      <guid>https://example.org/deep-learning/bias-and-variance/</guid>
+      <description>Bias and Variance Diagnosis of bias and variance Human-level performance error is often used as a proxy to the Bayes error (the theoretical lower bound of the error).
+ Training set error is higher than the estimated Bayes error =&amp;gt; avoidable bias Dev set error is higher than the training set error =&amp;gt; variance  Dealing with bias and variance Focus first on whatever is higher between avoidable bias and variance.</description>
     </item>
     
     <item>
-      <title>Home</title>
-      <link>https://www.yuntongzhang.com/home/</link>
-      <pubDate>Sun, 05 Aug 2018 19:52:39 +0800</pubDate>
+      <title>Neural Network</title>
+      <link>https://example.org/deep-learning/neural-network/</link>
+      <pubDate>Sun, 12 Jul 2020 11:15:52 +0800</pubDate>
       
-      <guid>https://www.yuntongzhang.com/home/</guid>
-      <description>CS Undergraduate Student @ National University of Singapore.
-Welcome to my site!
-I keep some of my projects information here, and occasionally update blog posts. Here are some of my blogs:</description>
+      <guid>https://example.org/deep-learning/neural-network/</guid>
+      <description>Neural Network Main steps for building a Neural Network  Define the model structure (# of input units, # of hidden units, etc.). Initialize the model&amp;rsquo;s parameters / Define hyperparameters. Loop:  Implement forward propagation Compute loss Implement backward propagation to get the gradients Update parameters (gradient decent)    Often times, the steps are built separately and integrated together later on.
+Activation function choices Apart from the sigmoid activation function, there are a few more other choices.</description>
+    </item>
+    
+    <item>
+      <title>What Happens Before Main</title>
+      <link>https://example.org/low-level-programming/what-happens-before-main/</link>
+      <pubDate>Thu, 25 Jun 2020 17:55:43 +0800</pubDate>
+      
+      <guid>https://example.org/low-level-programming/what-happens-before-main/</guid>
+      <description>What happens before main()? For dynamically loaded x86 ELF files on Linux, what happens before main() gets to run? The following graph demonstrates the entire process, including things happened before main and after main. (It should be read in a depth-first manner.)
+How to get to _start? When a program is run, the parent process calls execve(). The execve() call sets up the stack, and pushes onto it argc, argv and envp.</description>
+    </item>
+    
+    <item>
+      <title>ELF File on Linux</title>
+      <link>https://example.org/low-level-programming/elf-file-on-linux/</link>
+      <pubDate>Thu, 25 Jun 2020 16:18:47 +0800</pubDate>
+      
+      <guid>https://example.org/low-level-programming/elf-file-on-linux/</guid>
+      <description>ELF File on Linux Introduction This post from Linux Audit offers a good introduction to ELF files.
+Details Refer to the ELF file reference document for detailed documentation of ELF file format.
+Useful tools To work with ELF file, there are a few useful tools:
+ readelf: read information about different component of an ELF file. dumpelf: dump the entire internal ELF structure. vbindiff: find differences between two ELF files.  </description>
+    </item>
+    
+    <item>
+      <title>Intel X86 Opcode Table</title>
+      <link>https://example.org/low-level-programming/intel-x86-opcode-table/</link>
+      <pubDate>Mon, 22 Jun 2020 12:53:44 +0800</pubDate>
+      
+      <guid>https://example.org/low-level-programming/intel-x86-opcode-table/</guid>
+      <description>Intel x86 Assembler Instruction Set Opcode Table Refer to this page .</description>
+    </item>
+    
+    <item>
+      <title>Debugging Tips</title>
+      <link>https://example.org/low-level-programming/debugging-tips/</link>
+      <pubDate>Mon, 22 Jun 2020 10:25:12 +0800</pubDate>
+      
+      <guid>https://example.org/low-level-programming/debugging-tips/</guid>
+      <description>Debugging Tips Some debugging tips and tricks with GDB and other tools.
+List all mapped memory regions 1(gdb) help info proc 2Show /proc process information about any running process. 3Specify any process id, or use the program being debugged by default. 4Specify any of the following keywords for detailed info: 5 mappings -- list of mapped memory regions. 6 stat -- list a bunch of random process info. 7 status -- list a different bunch of random process info.</description>
+    </item>
+    
+    <item>
+      <title>Memory Mapped File Page Cache</title>
+      <link>https://example.org/low-level-programming/memory-mapped-file-page-cache/</link>
+      <pubDate>Sun, 21 Jun 2020 18:35:37 +0800</pubDate>
+      
+      <guid>https://example.org/low-level-programming/memory-mapped-file-page-cache/</guid>
+      <description>Memory-mapped File and Page Cache Memory-mapped file A memory-mapped file is a segment of virtual memory that has been assgined a direct byte-for-byte correlation with some portions of a file or file-like resource. This file-like resource can be:
+ (Typically) a file that is physically present on disk; A device; A shared memory object; (Some) other resource that OS can reference through a file descriptor.  This correlation between the virtual memory space and the file permits applications to treat the mapped portion as if it were primary memory.</description>
+    </item>
+    
+    <item>
+      <title>CVE-2014-9488</title>
+      <link>https://example.org/reproducing-cves/cve-2014-9488/</link>
+      <pubDate>Fri, 19 Jun 2020 12:47:39 +0800</pubDate>
+      
+      <guid>https://example.org/reproducing-cves/cve-2014-9488/</guid>
+      <description>CVE-2014-9488 (less out-of-bounds read) The is_utf8_well_formed function in GNU less before version 475 allows remote attackers to have unspecified impact via malformed UTF-8 characters, which triggers an out-of-bounds read. More details are shown on CVE Details .
+Bug Detail The bin_file function in filename.c is called when using less to display a file to determine if the file is binary. It calls utf_bin_count function which returns the number of invalid UTF-8 sequences found in a buffer:</description>
+    </item>
+    
+    <item>
+      <title>LD_PRELOAD Trick</title>
+      <link>https://example.org/low-level-programming/dynamic-linking-ld_preload/</link>
+      <pubDate>Thu, 04 Jun 2020 13:09:10 +0800</pubDate>
+      
+      <guid>https://example.org/low-level-programming/dynamic-linking-ld_preload/</guid>
+      <description>Dynamic Linking and LD_PRELOAD Dynamic Linker  A special part of an operating system that loads external shared libraries into a running process and then binds those shared libraries dynamically to the running process. Copies the content of libraries from disk to RAM, fills jump table and relocates pointers.  Implementation in Unix-like systems  An external executable (ld.so in Linux). At link time, path to the dynamic linker is embedded into the executable image.</description>
     </item>
     
   </channel>

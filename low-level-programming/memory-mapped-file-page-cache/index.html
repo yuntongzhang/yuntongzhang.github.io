@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.72.0" />
+  <title>Memory Mapped File Page Cache &middot; Remarques</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.302c42cf8d8975f02af310fb97ffc8a81dafcaefa1589c91894c154bb7f7ff43.css" integrity="sha256-MCxCz42JdfAq8xD7l//IqB2vyu&#43;hWJyRiUwVS7f3/0M=" media="screen" title="default">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+
+<body>
+  <nav style="margin-top: 1%;">
+  
+  <a href="https://example.org"><span class='homepage'>⌂</span>&nbsp;Homepage</a>
+  
+  
+  
+  <hr />
+</nav>
+
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#memory-mapped-file">Memory-mapped file</a>
+      <ul>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#common-uses">Common uses</a></li>
+      </ul>
+    </li>
+    <li><a href="#page-cache">Page cache</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  <h1 id="memory-mapped-file-and-page-cache">Memory-mapped File and Page Cache</h1>
+<h2 id="memory-mapped-file">Memory-mapped file</h2>
+<p>A memory-mapped file is a segment of <strong>virtual memory</strong> that has been assgined a direct byte-for-byte correlation with some portions of a file or file-like resource. This <em>file-like resource</em> can be:</p>
+<ul>
+<li>(Typically) a file that is physically present on disk;</li>
+<li>A device;</li>
+<li>A shared memory object;</li>
+<li>(Some) other resource that OS can reference through a file descriptor.</li>
+</ul>
+<p>This correlation between the <strong>virtual memory space</strong> and the <strong>file</strong> permits applications to treat the mapped portion as if it were primary memory. With this abstraction, any operation over that memory will be reflected to the file.</p>
+<p>Memory maps are always aligned to the page size (typically 4KB).</p>
+<h3 id="benefits">Benefits</h3>
+<h4 id="lazy-loading">Lazy loading</h4>
+<p>With memory-mapped files, it is possible to only use a small amount of RAM for very large file. Page-sized sections can be loaded as data is being edited, as memory-mapped files are loaded into memory one entire page at a time.</p>
+<h4 id="io-performance">I/O performance</h4>
+<p>The main benefit of memory mapping is increasing I/O performance, especially on large files. (For small files, memory-mapped files can rsult in waste due to the page alignment requirement.)</p>
+<p>The improved performance on read and write is because in most OS, the memory region mapped is actually the kernel&rsquo;s <strong>page cache</strong>, which means that no copies are needed to be created in user space. In contrast, if memory-mapped file is not used but a system call such as <code>pread()</code> is used, the kernel needs to copy the data from page cache into user space. The extra copying takes time and decreases the effectiveness of CPU cache by accessing this extra copy of data.</p>
+<p>Nevertheless, the performance boost depends on whether the actual data have to be read from the disk. If that is the case, the OS still has to read from disk, and a page fault would also incur cost although a system call is saved. But if the data is already in page cache, there should be improvement in performance.</p>
+<h3 id="common-uses">Common uses</h3>
+<h4 id="process-loading">Process loading</h4>
+<p>When a process is started, OS uses a memory-mapped file to bring the executable file nad other loadable modules into memory for execution. With 
+<a class="remote" href="https://en.wikipedia.org/wiki/Demand_paging" target="_blank">demand paging</a>
+
+, the OS can selectively load only those portions of a process image that actually need to be executed.</p>
+<h4 id="share-memory-between-processes">Share memory between processes</h4>
+<p>Two or more applications can simultaneously map a single physical file into memory and access this memory. However, since syncrhonization on the file access is not provided, the applcations have to implement mechanisms to avoid race conditions.</p>
+<h2 id="page-cache">Page cache</h2>
+<p>A page cache is a transparent cache for the pages originating from disk. The OS keeps a page cache in unused portions of the RAM, resulting in quicker access to the contents of cached pages.</p>
+<p>Usually all physical memory not directly allocated to applications is used by OS for page cache.</p>
+<p>Executable binaries are typically accessed through page cache. <code>mmap</code> would map the binary in page cache to the virtual memory space of an individual process. This enables sharing of binaries between separate processes, as well as the fast loading of program code.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>
+<a class="remote" href="https://en.wikipedia.org/wiki/Memory-mapped_file" target="_blank">Wikipedia page on memory-mapped file</a>
+
+</li>
+<li>
+<a class="remote" href="https://csharpvault.com/memory-mapped-files/" target="_blank">C# Valut post on memory-mapped file</a>
+
+</li>
+<li>
+<a class="remote" href="https://stackoverflow.com/questions/192527/what-are-the-advantages-of-memory-mapped-files" target="_blank">StackOverflow answer</a>
+
+</li>
+<li>
+<a class="remote" href="https://en.wikipedia.org/wiki/Page_cache" target="_blank">Wikipedia page on page cache</a>
+
+</li>
+<li>
+<a class="remote" href="https://manybutfinite.com/post/page-cache-the-affair-between-memory-and-files/" target="_blank">Blog post on page cache</a>
+
+</li>
+</ol>
+
+  </main>
+  <footer>
+    <hr />
+    <p style="font-size:20px">Last modification: 2020-06-21 at 18:35</p>
+<p style="font-size:18px;font-family:Georgia,'Times New Roman','KaiTi','楷体',STKaiti,'华文楷体',serif">
+    | 书山有路勤为径，学海无涯苦作舟。
+</p>
+  </footer>
+</body>
+</html>

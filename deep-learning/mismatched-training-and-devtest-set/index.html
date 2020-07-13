@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.72.0" />
+  <title>Mismatched Training and Dev/Test Set &middot; Remarques</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.302c42cf8d8975f02af310fb97ffc8a81dafcaefa1589c91894c154bb7f7ff43.css" integrity="sha256-MCxCz42JdfAq8xD7l//IqB2vyu&#43;hWJyRiUwVS7f3/0M=" media="screen" title="default">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+
+<body>
+  <nav style="margin-top: 1%;">
+  
+  <a href="https://example.org"><span class='homepage'>⌂</span>&nbsp;Homepage</a>
+  
+  
+  
+  <hr />
+</nav>
+
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#the-problem">The problem</a></li>
+    <li><a href="#bias-variance-analysis-when-mismatched">Bias Variance analysis when mismatched</a></li>
+  </ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  <h1 id="mismatched-training-and-devtest-set">Mismatched Training and Dev/Test Set</h1>
+<h2 id="the-problem">The problem</h2>
+<p>Sometimes, there are not enough data with the same distribution as dev/test set for us to use in training. Training data may then be obtained from other sources, but there is a potential issue of data distribution mismatch between training set and dev/test set.</p>
+<h2 id="bias-variance-analysis-when-mismatched">Bias Variance analysis when mismatched</h2>
+<p>Apart from the avoidable bias problem and the variance problem, we now have an additional data mismatch problem. To diagnose these three problems together, introduce a <strong>training-dev</strong> set, which has the same data distribution as the training set, but is not used during the training process.</p>
+<p>Now, the difference between training-dev set error and dev set error reflects the data mismatch between training and dev/test set.</p>
+<p><img src="/deep-learning/data-mismatch.png" alt="Data mismatch" width="50%" /></p>
+
+  </main>
+  <footer>
+    <hr />
+    <p style="font-size:20px">Last modification: 2020-07-13 at 09:20</p>
+<p style="font-size:18px;font-family:Georgia,'Times New Roman','KaiTi','楷体',STKaiti,'华文楷体',serif">
+    | 书山有路勤为径，学海无涯苦作舟。
+</p>
+  </footer>
+</body>
+</html>

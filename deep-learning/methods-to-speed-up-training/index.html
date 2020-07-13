@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.72.0" />
+  <title>Methods To Speed Up Training &middot; Remarques</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.302c42cf8d8975f02af310fb97ffc8a81dafcaefa1589c91894c154bb7f7ff43.css" integrity="sha256-MCxCz42JdfAq8xD7l//IqB2vyu&#43;hWJyRiUwVS7f3/0M=" media="screen" title="default">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+
+<body>
+  <nav style="margin-top: 1%;">
+  
+  <a href="https://example.org"><span class='homepage'>⌂</span>&nbsp;Homepage</a>
+  
+  
+  
+  <hr />
+</nav>
+
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#input-normalization">Input normalization</a></li>
+    <li><a href="#weight-initialization">Weight initialization</a></li>
+    <li><a href="#optimization-algorithms">Optimization algorithms</a>
+      <ul>
+        <li><a href="#mini-batch-gradient-descent">Mini-batch gradient descent</a></li>
+        <li><a href="#gradient-descent-with-momentum">Gradient descent with momentum</a></li>
+        <li><a href="#rmsprop">RMSprop</a></li>
+        <li><a href="#adam">Adam</a></li>
+      </ul>
+    </li>
+    <li><a href="#learning-rate-decay">Learning rate decay</a></li>
+    <li><a href="#hyperparameter-tuning">Hyperparameter tuning</a></li>
+    <li><a href="#batch-normalization">Batch normalization</a></li>
+  </ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  <h1 id="methods-to-speed-up-training">Methods to Speed up Training</h1>
+<h2 id="input-normalization">Input normalization</h2>
+<p>Performing input normalization on one sample:</p>
+<p>$$\bar{x} = \frac1m \sum_{i=1}^m x^{(i)}$$
+$$x^{(i)} := x^{(i)} - \bar{x}$$
+$$\sigma^2 = \frac1m \sum_{i=1}^m (x^{(i)})^2 $$
+$$x^{(i)} := \frac{x^{(i)}}{\sigma^2}$$</p>
+<h2 id="weight-initialization">Weight initialization</h2>
+<p>In neural network, weighs need to be initialized randomly to break symmetry, and also need to be small to hit the region of large gradients in the activation functions.</p>
+<p>For tanh activation function, use Xavier initialization:</p>
+<p>$$W^{[l]} = \operatorname{np.random.randn(shape\_params)} \times \sqrt{\frac{1}{n^{[l-1]}}}$$</p>
+<p>For ReLU activation function, use He initialization:</p>
+<p>$$W^{[l]} = \operatorname{np.random.randn(shape\_params)} \times \sqrt{\frac{2}{n^{[l-1]}}}$$</p>
+<h2 id="optimization-algorithms">Optimization algorithms</h2>
+<h3 id="mini-batch-gradient-descent">Mini-batch gradient descent</h3>
+<p>The mini-batch is also a hyperparameter. Roughly, choose the mini-batch size according the following guidelines:</p>
+<ul>
+<li>If the sample size is small (~a few thousands), just use batch gradient descent.</li>
+<li>If there are a lot of data, choose mini-batch size to be power-of-two. Eg. 64, 128, 256, etc.</li>
+<li>Consider the CPU/GPU memory size as well (whether they can fit in a single mini-batch of data).</li>
+</ul>
+<h3 id="gradient-descent-with-momentum">Gradient descent with momentum</h3>
+<p>Compute exponentially weighted average of the <strong>gradients</strong>, and use it to update the parameters.</p>
+<p>$$v_{dW} = \beta v_{dW} + (1-\beta)dW$$
+$$v_{db} = \beta v_{db} + (1-\beta)db$$
+$$w := w - \alpha v_{dW}$$
+$$b := b - \alpha v_{db}$$</p>
+<p>$\beta$ is a hyperparameter which usually takes value around 0.9 in practice.</p>
+<h3 id="rmsprop">RMSprop</h3>
+<p>RMSprop (Root Mean Square Propagation) computes exponential weighted average of the <strong>square of gradients</strong>. However, this exponentailly weighted average does not play the role of gradients in parameter update, but rather used to control the learning rate according to the gradients value.</p>
+<p>$$s_{dW} = \beta s_{dW} + (1-\beta)(dW)^2$$
+$$s_{db} = \beta s_{db} + (1-\beta)(db)^2$$
+$$w := w - \alpha \frac{dW}{\sqrt{s_{dW} + \varepsilon}}$$
+$$b := b - \alpha \frac{db}{\sqrt{s_{db} + \varepsilon}}$$</p>
+<p>$\varepsilon$ is a very small value (usually $10^{-8}$ in practice) added to avoid division by zero.</p>
+<h3 id="adam">Adam</h3>
+<p>Adam (Adaptive Moment Estimation) optimization algorithm is the combination of momentum and RMSprop.</p>
+<p>In Adam, before the iterations of gradient descent, $v$ and $s$ need to be initialized to zero:</p>
+<p>$$v_{dW} = 0, v_{db} = 0, s_{dW} = 0, s_{db} = 0$$</p>
+<p>During the $t^{th}$ iteration of gradient descent update:</p>
+<p>$$v_{dW} = \beta_1 v_{dW} + (1-\beta_1)dW, \quad v_{db} = \beta_1 v_{db} + (1-\beta_1)db$$
+$$s_{dW} = \beta_2 s_{dW} + (1-\beta_2)(dW)^2, \quad s_{db} = \beta_2 s_{db} + (1-\beta_2)(db)^2$$
+$$v_{dW}^{corrected} = \frac{v_{dW}}{1-(\beta_1)^t}, \quad v_{db}^{corrected} = \frac{v_{db}}{1-(\beta_1)^t}$$
+$$s_{dW}^{corrected} = \frac{s_{dW}}{1-(\beta_2)^t}, \quad s_{db}^{corrected} = \frac{s_{db}}{1-(\beta_2)^t}$$
+$$w := w - \alpha \frac{v_{dW}^{corrected}}{\sqrt{s_{dW}^{corrected}}+\varepsilon}$$
+$$b := b - \alpha \frac{v_{db}^{corrected}}{\sqrt{s_{db}^{corrected}}+\varepsilon}$$</p>
+<p>Here, $\alpha$, $\beta_1$, $\beta_2$ and $\varepsilon$ are hyperparameters:</p>
+<ul>
+<li>$\alpha$ needs to be tuned;</li>
+<li>$\beta_1$ is usually set to 0.9;</li>
+<li>$\beta_2$ is usually set to 0.999;</li>
+<li>$\varepsilon$ is usually set to $10^{-8}$.</li>
+</ul>
+<h2 id="learning-rate-decay">Learning rate decay</h2>
+<p>Large learning rate at the start of training can make gradient descent progress faster. Smaller learning rate at the later part of the training can make gradient descent converge to the optimal solution faster.</p>
+<p>There are a few ways for doing learning rate decay:</p>
+<ul>
+<li>$$\alpha = \frac{1}{1+decay\_rate \times epoch\_number} \alpha_0$$</li>
+<li>$$\alpha = 0.95^{epoch\_number} \alpha_0$$</li>
+<li>$$\alpha = \frac{k}{\sqrt{epoch\_number}} \alpha_0$$</li>
+</ul>
+<h2 id="hyperparameter-tuning">Hyperparameter tuning</h2>
+<p>How important are hyperparameters?</p>
+<ul>
+<li>Tier 1: learning rate $\alpha$.</li>
+<li>Tier 2: Momentum $\beta$, # of hidden units, mini-batch size.</li>
+<li>Tier 3: # of layers, learning rate $decay\_rate$.</li>
+<li>Tier 4: Adam hyperparameters $\beta_1$, $\beta_2$, $\varepsilon$.</li>
+</ul>
+<h2 id="batch-normalization">Batch normalization</h2>
+<p>Batch norm performs normalization on the output of the hidden layer units. It can be applied to either $z$ or $a$.</p>
+<p>If there are $m$ training samples, at a particular layer $l$, the steps to perform batch norm are:</p>
+<p>$$\mu = \frac1m \sum_{i=1}^m z^{(i)}$$
+$$\sigma^2 = \frac1m \sum_{i=1}^m (z^{(i)} - \mu)^2$$
+$$z_{norm}^{(i)} = \frac{z^{(i)} - \mu}{\sqrt{\sigma^2 + \varepsilon}}$$</p>
+<p>$\varepsilon$ is added to avoid division by zero, and is usually set as $10^{-8}$ in practice.</p>
+<p>In neural network, it is better for $z$ in different layers to have different distributions (different $\mu$ and $\sigma^2$). Moreover, if all $z$ clustered around the area of $\mu = 0, \sigma^2 = 1$, the non-linear regions of the activation functions are not sufficiently utilized. Thus we have:</p>
+<p>$$\tilde{z}^{(i)} = \gamma z_{norm}^{(i)} + \beta$$</p>
+<p>Now $\tilde{z}$ has mean $\beta$ and variance $\gamma$.</p>
+<p>Note that $\beta$ and $\gamma$ here are <strong>not</strong> hyperparameters, but rather the parameters need to be learned by gradient descent.</p>
+<p>Since $\beta$ sets the mean for $\tilde{z}$, the parameter $b$ is redundant now. Therefore, with batch normalization, the parameters need to be learned are $W$, $\beta$ and $\gamma$.</p>
+<p><strong>At test time.</strong> There is only one example when we are making predictions, so there is no readily calculatable mean and variance for batch norm at test time. What we can do is that, during training time, calculate the exponentially weighed average of the obtained $\mu$ and $\sigma^2$, and use those average values during test time.</p>
+
+  </main>
+  <footer>
+    <hr />
+    <p style="font-size:20px">Last modification: 2020-07-12 at 18:26</p>
+<p style="font-size:18px;font-family:Georgia,'Times New Roman','KaiTi','楷体',STKaiti,'华文楷体',serif">
+    | 书山有路勤为径，学海无涯苦作舟。
+</p>
+  </footer>
+</body>
+</html>

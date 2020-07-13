@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.72.0" />
+  <title>LD_PRELOAD Trick &middot; Remarques</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.302c42cf8d8975f02af310fb97ffc8a81dafcaefa1589c91894c154bb7f7ff43.css" integrity="sha256-MCxCz42JdfAq8xD7l//IqB2vyu&#43;hWJyRiUwVS7f3/0M=" media="screen" title="default">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+
+<body>
+  <nav style="margin-top: 1%;">
+  
+  <a href="https://example.org"><span class='homepage'>⌂</span>&nbsp;Homepage</a>
+  
+  
+  
+  <hr />
+</nav>
+
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#dynamic-linker">Dynamic Linker</a>
+      <ul>
+        <li><a href="#implementation-in-unix-like-systems">Implementation in Unix-like systems</a></li>
+      </ul>
+    </li>
+    <li><a href="#the-ld_preload-trick">The LD_PRELOAD Trick</a>
+      <ul>
+        <li><a href="#usage">Usage</a></li>
+      </ul>
+    </li>
+    <li><a href="#further-reading">Further Reading</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  <h1 id="dynamic-linking-and-ld_preload">Dynamic Linking and LD_PRELOAD</h1>
+<h2 id="dynamic-linker">Dynamic Linker</h2>
+<ul>
+<li>A special part of an operating system that loads external shared libraries into a running process and then binds those shared libraries dynamically to the running process.</li>
+<li>Copies the content of libraries from disk to RAM, fills jump table and relocates pointers.</li>
+</ul>
+<h3 id="implementation-in-unix-like-systems">Implementation in Unix-like systems</h3>
+<ul>
+<li>An external executable (<code>ld.so</code> in Linux).</li>
+<li>At link time, path to the dynamic linker is embedded into the executable image.</li>
+<li>An run time, kernel first loads and executes the dynamic linker in a process address space newly constructed as a result of calling <code>exec</code> like functions. The dynamic linker then loads the initial executable image and all the dynamically-linked libraries on which it depends, and starts the executable.</li>
+</ul>
+<h4 id="systems-using-elf">Systems using ELF</h4>
+<ul>
+<li>Dynamically loaded shared libraries can be identified by the filename suffix <code>.so</code> (shared object).</li>
+<li>The path of the dynamic linker im embedded at link time into the <code>.interp</code> section of the executable&rsquo;s <code>PT_INTERP</code> segment.</li>
+</ul>
+<h5 id="checking-shared-object-dependencies">Checking shared object dependencies</h5>
+<p>The <code>ldd</code> command can be used to print out the shared object dependencies required by each program or shared object. <code>ldd</code> invokes the standard dynamic linker (<code>ld.so</code> in Linux) with the <code>LD_TRACE_LOADED_OBJECTS</code> env variable set to 1. This causes the dynamic linker to inspect the program&rsquo;s dynamic dependencies, find and load the dependencies objects. For each dependency, <code>ldd</code> also displays the location of the matching object and the (hex) address at which it is loaded.</p>
+<h5 id="modify-dynamic-linker-behavior">Modify dynamic linker behavior</h5>
+<p>The dynamic linker can be influenced into modifying its behavior during either the program&rsquo;s linking or the program&rsquo;s execution. Typical modification is the use the use of <code>LD_LIBRARY_PATH</code> and <code>LD_PRELOAD</code> environment variables, which both adjust the runtime linking process.</p>
+<p><code>LD_LIBRARY_PATH</code> enables searching for shared libraries at alternate locations; <code>LD_PRELOAD</code> forcibly loads and links libraries that would otherwise not be used.</p>
+<h2 id="the-ld_preload-trick">The LD_PRELOAD Trick</h2>
+<p>With <code>LD_PRELOAD</code>, we can inject our own definitions to symbols which will be referenced by the executable. This is because <code>LD_PRELOAD</code> tells the linker to bind symbols provided by a certain shared library <em>before any other libraries</em> (including the C runtime, <code>libc.so</code>).</p>
+<h3 id="usage">Usage</h3>
+<p>If we want to use a custom <code>malloc()</code> instead of that provided by <code>libc.so</code> in our program, we can write out our own definition of <code>malloc()</code> in a file such as <code>custom-malloc.c</code> and compile it to a shared library like so:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ gcc -shared -fPIC -o custom-malloc.so custom-malloc.c
+</code></pre></div><p>Then we can use <code>LD_PRELOAD</code> to make a program use our own <code>malloc()</code> definition:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ <span style="color:#000">LD_PRELOAD</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">$PWD</span>/custom-malloc.so ./a.out
+</code></pre></div><p>If want to load multiple (more than one) shared libraries, connect them with <code>:</code> in the <code>LD_PRELOAD</code> environment variable:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ <span style="color:#000">LD_PRELOAD</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">$PWD</span>/custom-malloc.so:<span style="color:#000">$PWD</span>/another-library.so ./a.out
+</code></pre></div><h2 id="further-reading">Further Reading</h2>
+<p>This 
+<a class="remote" href="https://developer.ibm.com/tutorials/l-dynamic-libraries/" target="_blank">article by IBM</a>
+
+ provides an excellent explanation on dynamic linking and dynamic loading in Linux.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>Linux <code>man</code> page</li>
+<li>
+<a class="remote" href="https://en.wikipedia.org/wiki/Dynamic_linker" target="_blank">Wikipedia page on dynamic linker</a>
+
+</li>
+<li>
+<a class="remote" href="https://stackoverflow.com/questions/426230/what-is-the-ld-preload-trick" target="_blank">StackOverflow answer</a>
+
+</li>
+<li>
+<a class="remote" href="http://www.goldsborough.me/c/low-level/kernel/2016/08/29/16-48-53-the_-ld_preload-_trick/" target="_blank">Blog post by Peter Goldsborough</a>
+
+</li>
+</ol>
+
+  </main>
+  <footer>
+    <hr />
+    <p style="font-size:20px">Last modification: 2020-06-04 at 13:09</p>
+<p style="font-size:18px;font-family:Georgia,'Times New Roman','KaiTi','楷体',STKaiti,'华文楷体',serif">
+    | 书山有路勤为径，学海无涯苦作舟。
+</p>
+  </footer>
+</body>
+</html>

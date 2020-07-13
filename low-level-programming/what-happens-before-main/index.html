@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.72.0" />
+  <title>What Happens Before Main &middot; Remarques</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.302c42cf8d8975f02af310fb97ffc8a81dafcaefa1589c91894c154bb7f7ff43.css" integrity="sha256-MCxCz42JdfAq8xD7l//IqB2vyu&#43;hWJyRiUwVS7f3/0M=" media="screen" title="default">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+
+<body>
+  <nav style="margin-top: 1%;">
+  
+  <a href="https://example.org"><span class='homepage'>⌂</span>&nbsp;Homepage</a>
+  
+  
+  
+  <hr />
+</nav>
+
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-to-get-to-_start">How to get to <code>_start</code>?</a></li>
+    <li><a href="#what-does-__libc_start_main-do">What does <code>__libc_start_main</code> do?</a></li>
+    <li><a href="#the-c-level-constructor-__libc_csu_init">The C level constructor: <code>__libc_csu_init</code></a></li>
+    <li><a href="#calling-constructors-for-global-objects-__do_global_ctors_aux">Calling constructors for global objects: <code>__do_global_ctors_aux</code></a></li>
+    <li><a href="#now-what-about-exit">Now, what about <code>exit</code>?</a></li>
+    <li><a href="#what-functions-can-we-insert">What functions can we insert?</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  <h1 id="what-happens-before-main">What happens before <code>main()</code>?</h1>
+<p>For dynamically loaded x86 ELF files on Linux, what happens before <code>main()</code> gets to run? The following graph demonstrates the entire process, including things happened before <code>main</code> and after <code>main</code>. (It should be read in a depth-first manner.)</p>
+<p><img src="/low-level-programming/what-happens-before-main.png" alt="Function called before and after main()" width="90%" /></p>
+<h2 id="how-to-get-to-_start">How to get to <code>_start</code>?</h2>
+<p>When a program is run, the parent process calls <code>execve()</code>. The <code>execve()</code> call sets up the stack, and pushes onto it <code>argc</code>, <code>argv</code> and <code>envp</code>. The loader sets up relocations and calls the preinitializers. When everything is ready, the control is handed from the loader to the program by calling <code>_start()</code>.</p>
+<h2 id="what-does-__libc_start_main-do">What does <code>__libc_start_main</code> do?</h2>
+<p>In general, the function <code>__libc_start_main</code> carrying out the following tasks:</p>
+<ul>
+<li>Takes can of some security problems with setuid setgid programs;</li>
+<li>Starts up threading;</li>
+<li>Registers the <code>fini</code> (for the program) and <code>rtld_fini</code> (for the runtime loader) arguments to get run by <code>at_exit</code> to run the program&rsquo;s and the loader&rsquo;s cleanup routines;</li>
+<li>Calls the <code>init</code> argument (set to <code>__libc_csu_init</code>);</li>
+<li>Calls <code>main</code>;</li>
+<li>Calls <code>exit</code> with the return value of <code>main</code>.</li>
+</ul>
+<h2 id="the-c-level-constructor-__libc_csu_init">The C level constructor: <code>__libc_csu_init</code></h2>
+<p>Every executable gets a C level constructor <code>__libc_csu_init</code> and a C level destructor, <code>__libc_csu_fini</code>. Here is the actual code for <code>__libc_csu_init</code>:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">__libc_csu_init</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">argc</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">char</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">argv</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">char</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">envp</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>    <span style="color:#000">_init</span><span style="color:#000;font-weight:bold">();</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>    <span style="color:#204a87;font-weight:bold">const</span> <span style="color:#000">size_t</span> <span style="color:#000">size</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">__init_array_end</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">__init_array_start</span><span style="color:#000;font-weight:bold">;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>    <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">size_t</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">size</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">i</span><span style="color:#ce5c00;font-weight:bold">++</span><span style="color:#000;font-weight:bold">)</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span>        <span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">__init_array_start</span> <span style="color:#000;font-weight:bold">[</span><span style="color:#000">i</span><span style="color:#000;font-weight:bold">])(</span><span style="color:#000">argc</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">argv</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">envp</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>There are two parts of this function. Firstly, <code>_init</code> calls the function <code>__do_global_ctors_aux</code>, which calls the constructors for global objects. Secondly, the loop runs functions in the <code>__init_array</code>, which is run after the constructors and we can also add some functions to run in this phase (example later on).</p>
+<h2 id="calling-constructors-for-global-objects-__do_global_ctors_aux">Calling constructors for global objects: <code>__do_global_ctors_aux</code></h2>
+<p>If there is some problem in a program before <code>main</code> starts, this is probably where it can happen. Constructors for global C++ objects are put in the <code>.CTORS</code> section in an ELF file, and <code>__do_global_ctors_aux</code> is the auxillary function which the compiler creates for walking through the <code>.CTORS</code> section and calling these constructors.</p>
+<p>This is also where we can provide our own construtors to be executed. To tell <code>gcc</code> that the linker should stick a pointer to a customized function in the table used by <code>__do_global_ctors_aux</code>, we can use <code>__attribute__((constructor))</code>. Below is an example of inserting such a function (<code>__FUNCTION__</code> is filled in by the compiler with the name of the function):</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#8f5902;font-style:italic">#include</span> <span style="color:#8f5902;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#8f5902;font-style:italic">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">__attribute__</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">constructor</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#000">a_constructor</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s &#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span><span style="color:#8f5902;font-style:italic">// result of execution:
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span><span style="color:#8f5902;font-style:italic">// a_constructor main
+</span></code></pre></div><h2 id="now-what-about-exit">Now, what about <code>exit</code>?</h2>
+<p>After <code>main</code> returns, the result is passed to <code>exit</code> and <code>exit</code> is executed. <code>exit</code> does the following in order:</p>
+<ul>
+<li>Runs the functions registered with <code>at_exit</code> in the order they were added;</li>
+<li>Runs the functions in the <code>__fini_array</code>;</li>
+<li>Runs the destructors.</li>
+</ul>
+<h2 id="what-functions-can-we-insert">What functions can we insert?</h2>
+<p>There are functions that can be inserted in these different phases. The example below demonstrates where and how these functions can be inserted, and also illustrates the sequences of the different stages:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1</span><span style="color:#8f5902;font-style:italic">#include</span> <span style="color:#8f5902;font-style:italic">&lt;stdio.h&gt;</span><span style="color:#8f5902;font-style:italic">
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">preinit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">argc</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">char</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">argv</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">char</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">envp</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">init</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">argc</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">char</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">argv</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#204a87;font-weight:bold">char</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000">envp</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">fini</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11</span><span style="color:#000">__attribute__</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">section</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;.init_array&#34;</span><span style="color:#000;font-weight:bold">)))</span> <span style="color:#000">typeof</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">init</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">__init</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">init</span><span style="color:#000;font-weight:bold">;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12</span><span style="color:#000">__attribute__</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">section</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;.preinit_array&#34;</span><span style="color:#000;font-weight:bold">)))</span> <span style="color:#000">typeof</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">preinit</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">__preinit</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">preinit</span><span style="color:#000;font-weight:bold">;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13</span><span style="color:#000">__attribute__</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">section</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;.fini_array&#34;</span><span style="color:#000;font-weight:bold">)))</span> <span style="color:#000">typeof</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">fini</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">__fini</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">fini</span><span style="color:#000;font-weight:bold">;</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15</span><span style="color:#204a87;font-weight:bold">void</span>  <span style="color:#000">__attribute__</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">constructor</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#000">constructor</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">__attribute__</span><span style="color:#000;font-weight:bold">((</span><span style="color:#000">destructor</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#000">destructor</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">my_atexit</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#000">my_atexit2</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25</span>    <span style="color:#000">printf</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;%s</span><span style="color:#4e9a06">\n</span><span style="color:#4e9a06">&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">__FUNCTION__</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26</span><span style="color:#000;font-weight:bold">}</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28</span><span style="color:#204a87;font-weight:bold">int</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29</span>    <span style="color:#000">atexit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">my_atexit</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30</span>    <span style="color:#000">atexit</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">my_atexit2</span><span style="color:#000;font-weight:bold">);</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31</span><span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>The result of executing the program above is:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ ./prog
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>preinit
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span>constructor
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span>init
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span>my_atexit2
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span>my_atexit
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span>fini
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span>destructor
+</code></pre></div><p>This result is align with the graph at the beginning of this post.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>
+<a class="remote" href="http://dbp-consulting.com/tutorials/debugging/linuxProgramStartup.html" target="_blank">Post by Patrick Horgan on DBP Consulting</a>
+
+</li>
+<li>
+<a class="remote" href="https://stackoverflow.com/questions/6477494/do-global-dtors-aux-and-do-global-ctors-aux" target="_blank">StackOverflow post on `__do_global_ctors_aux`</a>
+
+</li>
+</ol>
+
+  </main>
+  <footer>
+    <hr />
+    <p style="font-size:20px">Last modification: 2020-06-25 at 17:55</p>
+<p style="font-size:18px;font-family:Georgia,'Times New Roman','KaiTi','楷体',STKaiti,'华文楷体',serif">
+    | 书山有路勤为径，学海无涯苦作舟。
+</p>
+  </footer>
+</body>
+</html>

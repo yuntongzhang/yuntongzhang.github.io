@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.72.0" />
+  <title>Bias and Variance &middot; Remarques</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.302c42cf8d8975f02af310fb97ffc8a81dafcaefa1589c91894c154bb7f7ff43.css" integrity="sha256-MCxCz42JdfAq8xD7l//IqB2vyu&#43;hWJyRiUwVS7f3/0M=" media="screen" title="default">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+
+<body>
+  <nav style="margin-top: 1%;">
+  
+  <a href="https://example.org"><span class='homepage'>⌂</span>&nbsp;Homepage</a>
+  
+  
+  
+  <hr />
+</nav>
+
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#diagnosis-of-bias-and-variance">Diagnosis of bias and variance</a></li>
+    <li><a href="#dealing-with-bias-and-variance">Dealing with bias and variance</a>
+      <ul>
+        <li><a href="#methods-to-reduce-avoidable-bias">Methods to reduce avoidable bias</a></li>
+        <li><a href="#methods-to-reduce-variance">Methods to reduce variance</a></li>
+      </ul>
+    </li>
+    <li><a href="#regularization-methods">Regularization methods</a>
+      <ul>
+        <li><a href="#l2-regularization">L2 regularization</a></li>
+        <li><a href="#dropout">Dropout</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  <h1 id="bias-and-variance">Bias and Variance</h1>
+<h2 id="diagnosis-of-bias-and-variance">Diagnosis of bias and variance</h2>
+<p>Human-level performance error is often used as a proxy to the Bayes error (the theoretical lower bound of the error).</p>
+<ul>
+<li>Training set error is higher than the estimated Bayes error =&gt; avoidable bias</li>
+<li>Dev set error is higher than the training set error =&gt; variance</li>
+</ul>
+<h2 id="dealing-with-bias-and-variance">Dealing with bias and variance</h2>
+<p>Focus first on whatever is higher between avoidable bias and variance.</p>
+<h3 id="methods-to-reduce-avoidable-bias">Methods to reduce avoidable bias</h3>
+<ul>
+<li>Train bigger model</li>
+<li>Train longer/better optimization algorithms
+<ul>
+<li>Momentum</li>
+<li>RMSprop</li>
+<li>Adam</li>
+</ul>
+</li>
+<li>NN architecture / hyperparameters search</li>
+</ul>
+<h3 id="methods-to-reduce-variance">Methods to reduce variance</h3>
+<ul>
+<li>More data</li>
+<li>Regularization
+<ul>
+<li>L2</li>
+<li>Dropout</li>
+<li>Data augmentation</li>
+</ul>
+</li>
+<li>NN architecture / hyperparameter search</li>
+</ul>
+<h2 id="regularization-methods">Regularization methods</h2>
+<h3 id="l2-regularization">L2 regularization</h3>
+<p>Neural network cost function with L2 regularization:</p>
+<p>$$J(w^{[1]},b^{[1]},\ldots,w^{[L]},b^{[L]}) = \frac{1}{m}  \sum_{i=1}^m  \mathcal{L}( \hat{y}^{(i)},y^{(i)}) + \frac{\lambda}{2m} \sum_{l=1}^L \Vert w^{[l]} \Vert _F^2$$</p>
+<p>where</p>
+<p>$$\Vert w^{[l]} \Vert_F^2 = \sum_{i=1}^{n^{[l-1]}} \sum_{j=1}^{n^{[l]}} (w_{ij}^{[l]})^2$$</p>
+<p>is called the Frobenius Norm.</p>
+<p>With L2 regularization, the parameter update rule becomes:</p>
+<p>$$w^{[l]} := w^{[l]} - \alpha \frac{\partial \mathcal{L}}{\partial w^{[l]}} - \alpha \frac{\lambda}{m} w^{[l]}$$</p>
+<p>As the new update rule multiplies the parameter $w^{[l]}$ with the term $(1 - \alpha \frac{\lambda}{m})$, which is smaller than 1, the process of L2 regularization is also called <strong>weight decay</strong>.</p>
+<h3 id="dropout">Dropout</h3>
+<p>Usually used in computer vision. Set a probability to drop each units in a layer of the network during the training process.</p>
+<p><strong>Inverted dropout</strong> is one implementation of the dropout regularizion. An example implementation of inverted dropout in python would be:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#000">keep_prob</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0.8</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#000">d3</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">np</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">random</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">randn</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">a3</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">shape</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">],</span> <span style="color:#000">a3</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">shape</span><span style="color:#000;font-weight:bold">[</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">])</span> <span style="color:#ce5c00;font-weight:bold">&lt;</span> <span style="color:#000">keep_prob</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span style="color:#000">a3</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">a3</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">d3</span> <span style="color:#8f5902;font-style:italic"># element-wise muiltiplcation</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span style="color:#000">a3</span> <span style="color:#ce5c00;font-weight:bold">/=</span> <span style="color:#000">keep_prob</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span style="color:#000">z4</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#000">np</span><span style="color:#ce5c00;font-weight:bold">.</span><span style="color:#000">dot</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">w4</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">a3</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">b4</span> 
+</code></pre></div><p>Here <code>d3</code> is a randomly generated boolean matrix with same dimensions as <code>a3</code>, acting as a mask to drop some units in the 3rd layer. Each layer has a <code>keep_prob</code>.</p>
+<p>Note that dropout is not used after training when making a prediction with the trained model.</p>
+
+  </main>
+  <footer>
+    <hr />
+    <p style="font-size:20px">Last modification: 2020-07-12 at 14:56</p>
+<p style="font-size:18px;font-family:Georgia,'Times New Roman','KaiTi','楷体',STKaiti,'华文楷体',serif">
+    | 书山有路勤为径，学海无涯苦作舟。
+</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Hugo 0.72.0" />
+  <title>Debugging Tips &middot; Remarques</title>
+  
+  <link rel="stylesheet" type="text/css" href="/main.min.302c42cf8d8975f02af310fb97ffc8a81dafcaefa1589c91894c154bb7f7ff43.css" integrity="sha256-MCxCz42JdfAq8xD7l//IqB2vyu&#43;hWJyRiUwVS7f3/0M=" media="screen" title="default">
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        processEscapes: true
+      }
+    });
+  </script>
+
+  <script type="text/javascript"
+    src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+</head>
+
+<body>
+  <nav style="margin-top: 1%;">
+  
+  <a href="https://example.org"><span class='homepage'>⌂</span>&nbsp;Homepage</a>
+  
+  
+  
+  <hr />
+</nav>
+
+  <aside>
+    <div id="toc" class="well col-md-4 col-sm-6">
+  <h1>Table of contents</h1>
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#list-all-mapped-memory-regions">List all mapped memory regions</a></li>
+    <li><a href="#recover-from-corrupted-stack-frame">Recover from corrupted stack frame</a></li>
+    <li><a href="#display-each-instruction-executed">Display each instruction executed</a></li>
+    <li><a href="#compare-two-binary-files">Compare two binary files</a></li>
+    <li><a href="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+
+    <hr />
+  </aside>
+  <main>
+  <h1 id="debugging-tips">Debugging Tips</h1>
+<p>Some debugging tips and tricks with GDB and other tools.</p>
+<h2 id="list-all-mapped-memory-regions">List all mapped memory regions</h2>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gdb</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">help</span> <span style="color:#000">info</span> <span style="color:#000">proc</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#000">Show</span> <span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">proc</span> <span style="color:#000">process</span> <span style="color:#000">information</span> <span style="color:#000">about</span> <span style="color:#000">any</span> <span style="color:#000">running</span> <span style="color:#000">process</span><span style="color:#000;font-weight:bold">.</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span style="color:#000">Specify</span> <span style="color:#000">any</span> <span style="color:#000">process</span> <span style="color:#000">id</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">or</span> <span style="color:#000">use</span> <span style="color:#000">the</span> <span style="color:#000">program</span> <span style="color:#000">being</span> <span style="color:#000">debugged</span> <span style="color:#000">by</span> <span style="color:#204a87;font-weight:bold">default</span><span style="color:#000;font-weight:bold">.</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span style="color:#000">Specify</span> <span style="color:#000">any</span> <span style="color:#000">of</span> <span style="color:#000">the</span> <span style="color:#000">following</span> <span style="color:#000">keywords</span> <span style="color:#204a87;font-weight:bold">for</span> <span style="color:#000">detailed</span> <span style="color:#f57900">info</span><span style="color:#000;font-weight:bold">:</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span>  <span style="color:#000">mappings</span> <span style="color:#ce5c00;font-weight:bold">--</span> <span style="color:#000">list</span> <span style="color:#000">of</span> <span style="color:#000">mapped</span> <span style="color:#000">memory</span> <span style="color:#000">regions</span><span style="color:#000;font-weight:bold">.</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span>  <span style="color:#000">stat</span>     <span style="color:#ce5c00;font-weight:bold">--</span> <span style="color:#000">list</span> <span style="color:#000">a</span> <span style="color:#000">bunch</span> <span style="color:#000">of</span> <span style="color:#000">random</span> <span style="color:#000">process</span> <span style="color:#000">info</span><span style="color:#000;font-weight:bold">.</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span>  <span style="color:#000">status</span>   <span style="color:#ce5c00;font-weight:bold">--</span> <span style="color:#000">list</span> <span style="color:#000">a</span> <span style="color:#000">different</span> <span style="color:#000">bunch</span> <span style="color:#000">of</span> <span style="color:#000">random</span> <span style="color:#000">process</span> <span style="color:#000">info</span><span style="color:#000;font-weight:bold">.</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span>  <span style="color:#000">all</span>      <span style="color:#ce5c00;font-weight:bold">--</span> <span style="color:#000">list</span> <span style="color:#000">all</span> <span style="color:#000">available</span> <span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">proc</span> <span style="color:#000">info</span><span style="color:#000;font-weight:bold">.</span>
+</code></pre></div><p>To list all the mapped memory regions (when there is <code>/proc</code>), use:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gdb</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">info</span> <span style="color:#000">proc</span> <span style="color:#000">mappings</span>
+</code></pre></div><p>When there is no <code>/proc</code> (such as during post-mortem debugging), use:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gdb</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">maintenance</span> <span style="color:#000">info</span> <span style="color:#000">sections</span>
+</code></pre></div><h2 id="recover-from-corrupted-stack-frame">Recover from corrupted stack frame</h2>
+<p>Sometimes, the program receives <code>SIGSEGV</code> and <code>backtrace</code> shows very small addresses (such as <code>0x00000000</code>) as the PC values pointing to the stack frames. Most likely, this is due to calling through a bogus function pointer which results in the stack frame being corrupted.</p>
+<p>Often times, an indirect call instruction pushes the PC after the call onto the stack and then sets the PC to the target value (which is the bogus address). Debugging information shown is usually not useful in this case, but we can recover the backtrace information by undoing the function call and manually popping the PC off the stack. On 64-bit x86 machine, the steps are:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gdb</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">set</span> <span style="color:#a40000">$</span><span style="color:#000">rip</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000;font-weight:bold">(</span><span style="color:#204a87;font-weight:bold">void</span> <span style="color:#ce5c00;font-weight:bold">**</span><span style="color:#000;font-weight:bold">)</span><span style="color:#a40000">$</span><span style="color:#000">rsp</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gdb</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">set</span> <span style="color:#a40000">$</span><span style="color:#000">rsp</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#a40000">$</span><span style="color:#000">rsp</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">8</span>
+</code></pre></div><p>Afterwards, <code>backtrace</code> should give more useful information and show where the execution really is. If the above does not work, repeat it a few times may help.</p>
+<h2 id="display-each-instruction-executed">Display each instruction executed</h2>
+<p>Sometimes we want to see all the instructions executed starting from one point in the program. This applies to several senarios, such as:</p>
+<ul>
+<li>A bug appears in the place where we do not have access to source or symbols;</li>
+<li>We want to understand the flow of execution better.</li>
+</ul>
+<p>We can achieve it by first setting breakpoint at the place we want to start printing instructions, and then use the following commands:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-c" data-lang="c"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span><span style="color:#8f5902;font-style:italic"># not required but nice to have log
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gdb</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">set</span> <span style="color:#000">logging</span> <span style="color:#000">on</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3</span><span style="color:#8f5902;font-style:italic"># ask gdb to not stop every screen-full
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gdb</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000">set</span> <span style="color:#000">height</span> <span style="color:#0000cf;font-weight:bold">0</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5</span><span style="color:#8f5902;font-style:italic"># start printing executed instructions
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">gdb</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">while</span> <span style="color:#0000cf;font-weight:bold">1</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">x</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">i</span> <span style="color:#a40000">$</span><span style="color:#000">rip</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">stepi</span>
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9</span> <span style="color:#ce5c00;font-weight:bold">&gt;</span> <span style="color:#000">end</span>
+</code></pre></div><h2 id="compare-two-binary-files">Compare two binary files</h2>
+<p>When working with binary rewritting or some other applications, it is useful to compare two binaries and check the differences between them.</p>
+<p>If only want to know <strong>whether</strong> two binaries are different, we can use:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ diff 1.bin 2.bin
+<span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2</span>Binary files 1.bin and 2.bin differ
+</code></pre></div><p>However, if we want to see the places where the two binaries differ, we should use <code>vbindiff</code> instead:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1</span>$ vbindiff 1.bin 2.bin
+</code></pre></div><h2 id="references">References</h2>
+<ol>
+<li>
+<a class="remote" href="https://stackoverflow.com/questions/5691193/gdb-listing-all-mapped-memory-regions-for-a-crashed-process" target="_blank">GDB: Listing all mapped memory regions for a crashed process</a>
+
+</li>
+<li>
+<a class="remote" href="https://stackoverflow.com/questions/9809810/gdb-corrupted-stack-frame-how-to-debug" target="_blank">GDB corrupted stack frame - How to debug?</a>
+
+</li>
+<li>
+<a class="remote" href="https://stackoverflow.com/questions/8841373/displaying-each-assembly-instruction-executed-in-gdb" target="_blank">Displaying each assembly instruction executed in gdb</a>
+
+</li>
+<li>
+<a class="remote" href="https://stackoverflow.com/questions/12118403/how-to-compare-binary-files-to-check-if-they-are-the-same" target="_blank">How to compare binary files to check if they are the same?</a>
+
+</li>
+</ol>
+
+  </main>
+  <footer>
+    <hr />
+    <p style="font-size:20px">Last modification: 2020-06-22 at 10:25</p>
+<p style="font-size:18px;font-family:Georgia,'Times New Roman','KaiTi','楷体',STKaiti,'华文楷体',serif">
+    | 书山有路勤为径，学海无涯苦作舟。
+</p>
+  </footer>
+</body>
+</html>
