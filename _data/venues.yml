@@ -1,6 +1,7 @@
-"AJP":
-  url: https://aapt.scitation.org/journal/ajp
-  color: "#00369f"
+"ISSTA":
+  url: https://dl.acm.org/conference/issta
+  color: "#45818e"
 
-"PhysRev":
-  url: https://journals.aps.org/
+"EuroSys":
+  url: https://dl.acm.org/conference/eurosys
+  color: "#373d3e"

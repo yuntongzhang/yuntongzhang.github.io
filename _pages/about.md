@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle:
 
 profile:
   align: right
@@ -17,6 +17,10 @@ news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
+
+Hello, I am Yuntong Zhang (张云彤). Welcome to my home page.
+
+I'm currently a second-year PhD student in the [Department of Computer Science](https://www.comp.nus.edu.sg/cs/) at [National University of Singapore](https://www.nus.edu.sg/) (NUS), advised by Prof. [Abhik Roychoudhury](https://abhikrc.com/).
 
 Write your biography here. Tell the world about yourself. Link to your favorite [subreddit](http://reddit.com). You can put a picture in, too. The code is already in, just name your picture `prof_pic.jpg` and put it in the `img/` folder.
 
