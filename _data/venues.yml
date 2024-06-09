@@ -5,3 +5,7 @@
 "EuroSys":
   url: https://dl.acm.org/conference/eurosys
   color: "#373d3e"
+
+"arXiv":
+  url: https://arxiv.org/
+  color: "#b31b1b"
