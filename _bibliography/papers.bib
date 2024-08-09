@@ -1,25 +1,25 @@
 ---
 ---
 
-@article{acr,
-  abbr = {arXiv},
-  bibtex_show = {true},
+@inproceedings{acr,
+  abbr = {ISSTA24},
   selected = {true},
-  pdf = {https://arxiv.org/abs/2404.05427},
+  pdf = {https://arxiv.org/pdf/2404.05427},
   code = {https://github.com/nus-apr/auto-code-rover},
 
-  abstract = {Researchers have made significant progress in automating the software development process in the past decades. Automated techniques for issue summarization, bug reproduction, fault localization, and program repair have been built to ease the workload of developers. Recent progress in Large Language Models (LLMs) has significantly impacted the development process, where developers can use LLM-based programming assistants to achieve automated coding. Nevertheless software engineering involves the process of program improvement apart from coding, specifically to enable software maintenance (e.g. program repair to fix bugs) and software evolution (e.g. feature additions). In this paper, we propose an automated approach for solving Github issues to autonomously achieve program improvement. In our approach called AutoCodeRover, LLMs are combined with sophisticated code search capabilities, ultimately leading to a program modification or patch. In contrast to recent LLM agent approaches from AI researchers and practitioners, our outlook is more software engineering oriented. We work on a program representation (abstract syntax tree) as opposed to viewing a software project as a mere collection of files. Our code search exploits the program structure in the form of classes/methods to enhance LLM's understanding of the issue's root cause, and effectively retrieve a context via iterative search. The use of spectrum based fault localization using tests, further sharpens the context, as long as a test-suite is available. We consider the recently proposed SWE-bench-lite which consists of 300 real-life Github issues involving bug fixing and feature additions. Experiments on SWE-bench-lite show increased efficacy in solving Github issues (22-23% on SWE-bench-lite), as compared to recent efforts from the AI community. Interestingly, our approach resolved 67 GitHub issues in less than 12 minutes each, whereas developers spent more than 2.77 days on average. On the full SWE-bench consisting of 2294 GitHub issues, AutoCodeRover solved around 16% of issues, which is higher than the efficacy of the recently reported AI software engineer Devin from Cognition Labs, while taking time comparable to Devin. We posit that our workflow enables autonomous software engineering, where, in future, auto-generated code from LLMs can be autonomously improved.},
+  abstract = {Researchers have made significant progress in automating the software development process in the past decades. Automated techniques for issue summarization, bug reproduction, fault localization, and program repair have been built to ease the workload of developers. Recent progress in Large Language Models (LLMs) has significantly impacted the development process, where developers can use LLM-based programming assistants to achieve automated coding. Nevertheless, software engineering involves the process of program improvement apart from coding, specifically to enable software maintenance (e.g. program repair to fix bugs) and software evolution (e.g. feature additions). In this paper, we propose an automated approach for solving Github issues to autonomously achieve program improvement. In our approach called AutoCodeRover, LLMs are combined with sophisticated code search capabilities, ultimately leading to a program modification or patch. In contrast to recent LLM agent approaches from AI researchers and practitioners, our outlook is more software engineering oriented. We work on a program representation (abstract syntax tree) as opposed to viewing a software project as a mere collection of files. Our code search exploits the program structure in the form of classes/methods to enhance LLM's understanding of the issue's root cause, and effectively retrieve a context via iterative search. The use of spectrum-based fault localization using tests, further sharpens the context, as long as a test-suite is available. Experiments on the recently proposed SWE-bench-lite (300 real-life Github issues) show increased efficacy in solving Github issues (19% on SWE-bench-lite), which is higher than the efficacy of the recently reported Swe-agent. Interestingly, our approach resolved 57 GitHub issues in about 4 minutes each (pass@1), whereas developers spent more than 2.68 days on average. In addition, AutoCodeRover achieved this efficacy with significantly lower cost (on average, $0.43 USD), compared to other baselines. We posit that our workflow enables autonomous software engineering, where, in future, auto-generated code from LLMs can be autonomously improved.},
 
   title = {AutoCodeRover: Autonomous Program Improvement},
   author = {Zhang, Yuntong and Ruan, Haifeng and Fan, Zhiyu and Roychoudhury, Abhik},
-  journal = {arXiv preprint arXiv:2404.05427},
-  year = {2024}
+
+  booktitle = {Proceedings of the 33rd ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA)},
+  year = {2024},
+  series = {ISSTA24}
 }
 
 
 @article{efffix,
   abbr = {arXiv},
-  bibtex_show = {true},
   selected = {false},
   pdf = {https://arxiv.org/abs/2308.00294},
 
@@ -35,7 +35,6 @@
 
 @article{fuzzrepair,
   abbr = {arXiv},
-  bibtex_show = {true},
   selected = {false},
   pdf = {https://arxiv.org/abs/2308.00666},
 
@@ -49,8 +48,7 @@
 
 
 @inproceedings{vulnfix,
-  abbr = {ISSTA},
-  bibtex_show = {true},
+  abbr = {ISSTA22},
   selected = {true},
   pdf = {vulnfix.pdf},
   code = {https://github.com/yuntongzhang/vulnfix},
@@ -65,18 +63,17 @@
   url = {https://doi.org/10.1145/3533767.3534387},
   doi = {10.1145/3533767.3534387},
   abstract = {Program vulnerabilities, even when detected and reported, are not fixed immediately. The time lag between the reporting and fixing of a vulnerability causes open-source software systems to suffer from significant exposure to possible attacks. In this paper, we propose a counter-example guided inductive inference procedure over program states to define likely invariants at possible fix locations. The likely invariants are constructed via mutation over states at the fix location, which turns out to be more effective for inductive property inference, as compared to the usual greybox fuzzing over program inputs. Once such likely invariants, which we call patch invariants, are identified, we can use them to construct patches via simple patch templates. Our work assumes that only one failing input (representing the exploit) is available to start the repair process. Experiments on the VulnLoc data-set of 39 vulnerabilities, which has been curated in previous works on vulnerability repair, show the effectiveness of our repair procedure. As compared to proposed approaches for vulnerability repair such as CPR or SenX which are based on concolic and symbolic execution respectively, we can repair significantly more vulnerabilities. Our results show the potential for program repair via inductive constraint inference, as opposed to generating repair constraints via deductive/symbolic analysis of a given test-suite.},
-  booktitle = {Proceedings of the 31st ACM SIGSOFT International Symposium on Software Testing and Analysis},
+  booktitle = {Proceedings of the 31st ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA)},
   pages = {691–702},
   numpages = {12},
   keywords = {Automated program repair, Snapshot fuzzing, Inductive inference},
   location = {Virtual, South Korea},
-  series = {ISSTA 2022}
+  series = {ISSTA22}
 }
 
 
 @inproceedings{redfat,
-  abbr = {EuroSys},
-  bibtex_show = {true},
+  abbr = {EuroSys22},
   selected = {true},
   pdf = {redfat.pdf},
   code = {https://github.com/GJDuck/RedFat},
@@ -90,10 +87,10 @@
   url = {https://doi.org/10.1145/3492321.3519580},
   doi = {10.1145/3492321.3519580},
   abstract = {Memory errors, such as buffer overflows and use-after-free, remain the root cause of many security vulnerabilities in modern software. The use of closed source software further exacerbates the problem, as source-based memory error mitigation cannot be applied. While many memory error detection tools exist, most are based on a single error detection methodology with resulting known limitations, such as incomplete memory error detection (redzones) or false error detections (low-fat pointers). In this paper we introduce RedFat, a memory error hardening tool for stripped binaries that is fast, practical and scalable. The core idea behind RedFat is to combine complementary error detection methodologies---redzones and low-fat pointers---in order to detect more memory errors that can be detected by each individual methodology alone. However, complementary error detection also inherits the limitations of each approach, such as false error detections from low-fat pointers. To mitigate this, we introduce a profile-based analysis that automatically determines the strongest memory error protection possible without negative side effects.We implement RedFat on top of a scalable binary rewriting framework, and demonstrate low overheads compared to the current state-of-the-art. We show RedFat to be language agnostic on C/C++/Fortran binaries with minimal requirements, and works with stripped binaries for both position independent/dependent code. We also show that the RedFat instrumentation can scale to very large/complex binaries, such as Google Chrome.},
-  booktitle = {Proceedings of the Seventeenth European Conference on Computer Systems},
+  booktitle = {Proceedings of the Seventeenth European Conference on Computer Systems (EuroSys)},
   pages = {117–131},
   numpages = {15},
   keywords = {static binary rewriting, low-fat pointers, use-after-free, binary instrumentation, buffer overflows, memory errors, redzones, memory safety, binary hardening},
   location = {Rennes, France},
-  series = {EuroSys '22}
+  series = {EuroSys22}
 }

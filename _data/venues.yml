@@ -1,8 +1,12 @@
-"ISSTA":
+"ISSTA24":
   url: https://dl.acm.org/conference/issta
   color: "#45818e"
 
-"EuroSys":
+"ISSTA22":
+  url: https://dl.acm.org/conference/issta
+  color: "#45818e"
+
+"EuroSys22":
   url: https://dl.acm.org/conference/eurosys
   color: "#373d3e"
 
