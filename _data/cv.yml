@@ -2,96 +2,77 @@
   type: map
   contents:
     - name: Full Name
-      value: Albert Einstein
-    - name: Date of Birth
-      value: 14th March 1879
-    - name: Languages
-      value: English, German
+      value: Yuntong Zhang
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
+    - title: PhD in Computer Science
+      institution: National University of Singapore, Singapore
+      year: 2021 - Now
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
+        - Advised by Prof. <a href="https://abhikrc.com/">Abhik Roychoudhury</a>.
+    - title: Bachelor's degree in Computer Science
+      institution: National University of Singapore, Singapore
+      year: 2017 - 2021
       description:
-        - Description 1.
-        - Description 2.
+        - Grade - 4.9/5.0.
+        - Dean's List (AY2018/2019 Sem1, AY2019/2020 Sem2, AY2020/2021 Sem1).
 
 - title: Experience
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Teaching Assistant
+      institution: National University of Singapore, Singapore
+      year: 2018 - 2020
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+        - CS2040S - Data Structures and Algorithms (AY2019/20 Sem2).
+        - CS2106 - Introduction to Operating Systems (AY2019/20 Sem2).
+        - CS1010S - Programming Methodology (AY2019/20 Sem1).
+        - CS1101S - Programming Methodology (AY2018/19 Sem1).
+
+    - title: Software Engineering Intern
+      institution: Sea Group, Singapore
+      year: 2019
       description:
-        - Description 1.
-        - Description 2.
+        - Worked in the backend engineering team on server monitoring system.
 
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
-
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
+    - title: Research and Development Intern
+      institution: Yitu Tech, Singapore
+      year: 2018
       description:
+        - Worked on the internal AI office assistant system.
 
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
+# - title: Open Source Projects
+#   type: time_table
+#   contents:
+#     - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
+#       year: 2015-now
+#       description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
 
 - title: Honors and Awards
   type: time_table
   contents:
-    - year: 1921
-      items: 
-        - Nobel Prize in Physics 
-        - Matteucci Medal
-    - year: 2029
-      items: 
-        - Max Planck Medal
-
-- title: Academic Interests
-  type: nested_list
-  contents:
-    - title: Topic 1.
-      items: 
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
+    - year: 2022
       items:
-        - Description 1.
-        - Description 2.
+        - NUS School of Computing Research Achievement Award.
+    - year: 2021
+      items:
+        - <a href="https://www.comp.nus.edu.sg/news/archives/y2021/2021-five-graduates-win-ourp/">NUS Outstanding Undergraduate Researcher Prize</a>.
 
-- title: Other Interests
-  type: list
-  contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+# - title: Academic Interests
+#   type: nested_list
+#   contents:
+#     - title: Topic 1.
+#       items:
+#         - Description 1.
+#         - Description 2.
+#     - title: Topic 2.
+#       items:
+#         - Description 1.
+#         - Description 2.
+
+# - title: Other Interests
+#   type: list
+#   contents:
+#     - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.

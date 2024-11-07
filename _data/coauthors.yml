@@ -1,34 +1,39 @@
-"Adams":
-  - firstname: ["Edwin", "E.", "E. P.", "Edwin Plimpton"]
-    url: https://en.wikipedia.org/wiki/Edwin_Plimpton_Adams
+"Gao":
+  - firstname: ["Xiang", "X."]
+    url: https://gaoxiang9430.github.io/index.html
 
-"Podolsky":
-  - firstname: ["Boris", "B.", "B. Y.", "Boris Yakovlevich"]
-    url: https://en.wikipedia.org/wiki/Boris_Podolsky
+"Duck":
+  - firstname: ["Gregory J.", "Gregory J"]
+    url: https://www.comp.nus.edu.sg/~gregory/
 
-"Rosen":
-  - firstname: ["Nathan", "N."]
-    url: https://en.wikipedia.org/wiki/Nathan_Rosen
+"Roychoudhury":
+  - firstname: ["Abhik"]
+    url: https://abhikrc.com/
 
-"Bach": 
-  - firstname: ["Johann Sebastian", "J. S."]
-    url: https://en.wikipedia.org/wiki/Johann_Sebastian_Bach
+"Yap":
+  - firstname: ["Roland H. C."]
+    url: https://www.comp.nus.edu.sg/~ryap/
 
-  - firstname: ["Carl Philipp Emanuel", "C. P. E."]
-    url: https://en.wikipedia.org/wiki/Carl_Philipp_Emanuel_Bach
+"Ruan":
+  - firstname: ["Haifeng"]
+    url: https://scholar.google.com/citations?user=h4ipIPoAAAAJ&hl=zh-CN
 
-"Przibram":
-  - firstname: ["Karl"]
-    url: https://link.springer.com/article/10.1007/s00016-019-00242-z
+"Fan":
+  - firstname: ["Zhiyu"]
+    url: https://zhiyufan.github.io/
 
-"Schrödinger":
-  - firstname: ["Erwin"]
-    url: https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger
+"Shariffdeen":
+  - firstname: ["Ridwan"]
+    url: https://rshariffdeen.com/
 
-"Lorentz":
-  - firstname: ["Hendrik Antoon"]
-    url: https://en.wikipedia.org/wiki/Hendrik_Lorentz
+"Tan":
+  - firstname: ["Jiaqi"]
+    url: https://tjiaqi.github.io/
 
-"Planck":
-  - firstname: ["Max"]
-    url: https://en.wikipedia.org/wiki/Max_Planck
+"Costea":
+  - firstname: ["Andreea"]
+    url: https://www.comp.nus.edu.sg/~andreeac/
+
+"McCall":
+  - firstname: ["Davin"]
+    url: https://labs.oracle.com/pls/apex/f?p=94065:11:116541844650272:2821
