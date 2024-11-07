@@ -1,115 +1,96 @@
 ---
 ---
 
-@string{aps = {American Physical Society,}}
+@inproceedings{acr,
+  abbr = {ISSTA24},
+  selected = {true},
+  pdf = {https://arxiv.org/pdf/2404.05427},
+  code = {https://github.com/nus-apr/auto-code-rover},
 
-@book{einstein1920relativity,
-  title={Relativity: the Special and General Theory},
-  author={Einstein, Albert},
-  year={1920},
-  publisher={Methuen & Co Ltd},
-  html={relativity.html}
+  abstract = {Researchers have made significant progress in automating the software development process in the past decades. Automated techniques for issue summarization, bug reproduction, fault localization, and program repair have been built to ease the workload of developers. Recent progress in Large Language Models (LLMs) has significantly impacted the development process, where developers can use LLM-based programming assistants to achieve automated coding. Nevertheless, software engineering involves the process of program improvement apart from coding, specifically to enable software maintenance (e.g. program repair to fix bugs) and software evolution (e.g. feature additions). In this paper, we propose an automated approach for solving Github issues to autonomously achieve program improvement. In our approach called AutoCodeRover, LLMs are combined with sophisticated code search capabilities, ultimately leading to a program modification or patch. In contrast to recent LLM agent approaches from AI researchers and practitioners, our outlook is more software engineering oriented. We work on a program representation (abstract syntax tree) as opposed to viewing a software project as a mere collection of files. Our code search exploits the program structure in the form of classes/methods to enhance LLM's understanding of the issue's root cause, and effectively retrieve a context via iterative search. The use of spectrum-based fault localization using tests, further sharpens the context, as long as a test-suite is available. Experiments on the recently proposed SWE-bench-lite (300 real-life Github issues) show increased efficacy in solving Github issues (19% on SWE-bench-lite), which is higher than the efficacy of the recently reported Swe-agent. Interestingly, our approach resolved 57 GitHub issues in about 4 minutes each (pass@1), whereas developers spent more than 2.68 days on average. In addition, AutoCodeRover achieved this efficacy with significantly lower cost (on average, $0.43 USD), compared to other baselines. We posit that our workflow enables autonomous software engineering, where, in future, auto-generated code from LLMs can be autonomously improved.},
+
+  title = {AutoCodeRover: Autonomous Program Improvement},
+  author = {Zhang, Yuntong and Ruan, Haifeng and Fan, Zhiyu and Roychoudhury, Abhik},
+
+  booktitle = {Proceedings of the 33rd ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA)},
+  year = {2024},
+  series = {ISSTA24}
 }
 
-@book{einstein1956investigations,
-  bibtex_show={true},
-  title={Investigations on the Theory of the Brownian Movement},
-  author={Einstein, Albert},
-  year={1956},
-  publisher={Courier Corporation},
-  preview={brownian-motion.gif}
+
+@article{efffix,
+  abbr = {arXiv},
+  selected = {false},
+  pdf = {https://arxiv.org/abs/2308.00294},
+
+  abstract = {Automated Program Repair (APR) techniques typically rely on a given test-suite to guide the repair process. Apart from the need to provide test oracles, this makes the produced patches prone to test data over-fitting. In this work, instead of relying on test cases, we show how to automatically repair memory safety issues, by leveraging static analysis (specifically Incorrectness Separation Logic) to guide repair. Our proposed approach learns what a desirable patch is by inspecting how close a patch is to fixing the bug based on the feedback from incorrectness separation logic based static analysis (specifically the Pulse analyser), and turning this information into a distribution of probabilities over context free grammars. Furthermore, instead of focusing on heuristics for reducing the search space of patches, we make repair scalable by creating classes of equivalent patches according to the effect they have on the symbolic heap, and then invoking the validation oracle only once per class of patch equivalence. This allows us to efficiently discover repairs even in the presence of a large pool of patch candidates offered by our generic patch synthesis mechanism. Experimental evaluation of our approach was conducted by repairing real world memory errors in OpenSSL, swoole and other subjects. The evaluation results show the scalability and efficacy of our approach in automatically producing high quality patches.
+  },
+
+  title = {Patch Space Exploration using Static Analysis Feedback},
+  author = {Zhang, Yuntong and Costea, Andreea and Shariffdeen, Ridwan and McCall, Davin and Roychoudhury, Abhik},
+  journal = {arXiv preprint arXiv:2308.00294},
+  year = {2023}
 }
 
-@article{einstein1950meaning,
-  abbr={AJP},
-  bibtex_show={true},
-  title={The meaning of relativity},
-  author={Einstein, Albert and Taub, AH},
-  journal={American Journal of Physics},
-  volume={18},
-  number={6},
-  pages={403--404},
-  year={1950},
-  publisher={American Association of Physics Teachers}
+
+@article{fuzzrepair,
+  abbr = {arXiv},
+  selected = {false},
+  pdf = {https://arxiv.org/abs/2308.00666},
+
+  abstract = {Fuzz testing (fuzzing) is a well-known method for exposing bugs/vulnerabilities in software systems. Popular fuzzers, such as AFL, use a biased random search over the domain of program inputs, where 100s or 1000s of inputs (test cases) are executed per second in order to expose bugs. If a bug is discovered, it can either be fixed manually by the developer or fixed automatically using an Automated Program Repair (APR) tool. Like fuzzing, many existing APR tools are search-based, but over the domain of patches rather than inputs. In this paper, we propose search-based program repair as patch-level fuzzing. The basic idea is to adapt a fuzzer (AFL) to fuzz over the patch space rather than the input space. Thus we use a patch-space fuzzer to explore a patch space, while using a traditional input level fuzzer to rule out patch candidates and help in patch selection. To improve the throughput, we propose a compilation-free patch validation methodology, where we execute the original (unpatched) program natively, then selectively interpret only the specific patched statements and expressions. Since this avoids (re)compilation, we show that compilation-free patch validation can achieve a similar throughput as input-level fuzzing (100s or 1000s of execs/sec). We show that patch-level fuzzing and input-level fuzzing can be combined, for a co-exploration of both spaces in order to find better quality patches. Such a collaboration between input-level fuzzing and patch-level fuzzing is then employed to search over candidate fix locations, as well as patch candidates in each fix location. Our results show that our tool FuzzRepair is more effective in patching security vulnerabilities than well-known existing repair tools GenProg/Darjeeling, Prophet and Concolic Program Repair (CPR). Moreover, our approach produces other artifacts such as fix locations, and crashing tests (which show the evidence why patch candidates are ruled out). Thus our approach provides a pragmatic solution to enhance automation in program vulnerability repair, thereby reducing exposure of critical software systems to possible attacks.},
+
+  title = {Program Repair by Fuzzing over Patch and Input Space},
+  author = {Zhang, Yuntong and Shariffdeen, Ridwan and Duck, Gregory J and Tan, Jiaqi and Roychoudhury, Abhik},
+  journal = {arXiv preprint arXiv:2308.00666},
+  year = {2023}
 }
 
-@article{PhysRev.47.777,
-  abbr={PhysRev},
-  title={Can Quantum-Mechanical Description of Physical Reality Be Considered Complete?},
-  author={Einstein*†, A. and Podolsky*, B. and Rosen*, N.},
-  abstract={In a complete theory there is an element corresponding to each element of reality. A sufficient condition for the reality of a physical quantity is the possibility of predicting it with certainty, without disturbing the system. In quantum mechanics in the case of two physical quantities described by non-commuting operators, the knowledge of one precludes the knowledge of the other. Then either (1) the description of reality given by the wave function in quantum mechanics is not complete or (2) these two quantities cannot have simultaneous reality. Consideration of the problem of making predictions concerning a system on the basis of measurements made on another system that had previously interacted with it leads to the result that if (1) is false then (2) is also false. One is thus led to conclude that the description of reality as given by a wave function is not complete.},
-  journal={Phys. Rev.},
-  location={New Jersey},
-  volume={47},
-  issue={10},
-  pages={777--780},
-  numpages={0},
-  year={1935},
-  month={May},
-  publisher=aps,
-  doi={10.1103/PhysRev.47.777},
-  url={http://link.aps.org/doi/10.1103/PhysRev.47.777},
-  html={https://journals.aps.org/pr/abstract/10.1103/PhysRev.47.777},
-  pdf={example_pdf.pdf},
-  altmetric={248277},
-  dimensions={true},
-  google_scholar_id={qyhmnyLat1gC},
-  video={https://www.youtube-nocookie.com/embed/aqz-KE-bpKQ},
-  additional_info={. *More Information* can be [found here](https://github.com/alshedivat/al-folio/)},
-  annotation={* Example use of superscripts<br>† Albert Einstein},
-  selected={true},
-  inspirehep_id = {3255}
+
+@inproceedings{vulnfix,
+  abbr = {ISSTA22},
+  selected = {true},
+  pdf = {vulnfix.pdf},
+  code = {https://github.com/yuntongzhang/vulnfix},
+  video = {https://www.youtube.com/watch?v=w-3wa-ecEaM},
+
+  author = {Zhang, Yuntong and Gao, Xiang and Duck, Gregory J. and Roychoudhury, Abhik},
+  title = {Program Vulnerability Repair via Inductive Inference},
+  year = {2022},
+  isbn = {9781450393799},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3533767.3534387},
+  doi = {10.1145/3533767.3534387},
+  abstract = {Program vulnerabilities, even when detected and reported, are not fixed immediately. The time lag between the reporting and fixing of a vulnerability causes open-source software systems to suffer from significant exposure to possible attacks. In this paper, we propose a counter-example guided inductive inference procedure over program states to define likely invariants at possible fix locations. The likely invariants are constructed via mutation over states at the fix location, which turns out to be more effective for inductive property inference, as compared to the usual greybox fuzzing over program inputs. Once such likely invariants, which we call patch invariants, are identified, we can use them to construct patches via simple patch templates. Our work assumes that only one failing input (representing the exploit) is available to start the repair process. Experiments on the VulnLoc data-set of 39 vulnerabilities, which has been curated in previous works on vulnerability repair, show the effectiveness of our repair procedure. As compared to proposed approaches for vulnerability repair such as CPR or SenX which are based on concolic and symbolic execution respectively, we can repair significantly more vulnerabilities. Our results show the potential for program repair via inductive constraint inference, as opposed to generating repair constraints via deductive/symbolic analysis of a given test-suite.},
+  booktitle = {Proceedings of the 31st ACM SIGSOFT International Symposium on Software Testing and Analysis (ISSTA)},
+  pages = {691–702},
+  numpages = {12},
+  keywords = {Automated program repair, Snapshot fuzzing, Inductive inference},
+  location = {Virtual, South Korea},
+  series = {ISSTA22}
 }
 
-@article{einstein1905molekularkinetischen,
-  title={{\"U}ber die von der molekularkinetischen Theorie der W{\"a}rme geforderte Bewegung von in ruhenden Fl{\"u}ssigkeiten suspendierten Teilchen},
-  author={Einstein, A.},
-  journal={Annalen der physik},
-  volume={322},
-  number={8},
-  pages={549--560},
-  year={1905},
-  publisher={Wiley Online Library}
-}
 
-@article{einstein1905movement,
-  abbr={Ann. Phys.},
-  title={Un the movement of small particles suspended in statiunary liquids required by the molecular-kinetic theory 0f heat},
-  author={Einstein, A.},
-  journal={Ann. Phys.},
-  volume={17},
-  pages={549--560},
-  year={1905}
-}
+@inproceedings{redfat,
+  abbr = {EuroSys22},
+  selected = {true},
+  pdf = {redfat.pdf},
+  code = {https://github.com/GJDuck/RedFat},
 
-@article{einstein1905electrodynamics,
-  title={On the electrodynamics of moving bodies},
-  author={Einstein, A.},
-  year={1905}
-}
-
-@Article{einstein1905photoelectriceffect,
-  bibtex_show={true},
-  abbr={Ann. Phys.},
-  title="{{\"U}ber einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt}",
-  author={Albert Einstein},
-  abstract={This is the abstract text.},
-  journal={Ann. Phys.},
-  volume={322},
-  number={6},
-  pages={132--148},
-  year={1905},
-  doi={10.1002/andp.19053220607},
-  award={Albert Einstein receveid the **Nobel Prize in Physics** 1921 *for his services to Theoretical Physics, and especially for his discovery of the law of the photoelectric effect*},
-  award_name={Nobel Prize}
-}
-
-@book{przibram1967letters,
-  bibtex_show={true},
-  title={Letters on wave mechanics},
-  author={Einstein, Albert and Schrödinger, Erwin and Planck, Max and Lorentz, Hendrik Antoon and Przibram, Karl},
-  year={1967},
-  publisher={Vision},
-  preview={wave-mechanics.gif},
-  abbr={Vision}
+  author = {Duck, Gregory J. and Zhang, Yuntong and Yap, Roland H. C.},
+  title = {Hardening Binaries against More Memory Errors},
+  year = {2022},
+  isbn = {9781450391627},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3492321.3519580},
+  doi = {10.1145/3492321.3519580},
+  abstract = {Memory errors, such as buffer overflows and use-after-free, remain the root cause of many security vulnerabilities in modern software. The use of closed source software further exacerbates the problem, as source-based memory error mitigation cannot be applied. While many memory error detection tools exist, most are based on a single error detection methodology with resulting known limitations, such as incomplete memory error detection (redzones) or false error detections (low-fat pointers). In this paper we introduce RedFat, a memory error hardening tool for stripped binaries that is fast, practical and scalable. The core idea behind RedFat is to combine complementary error detection methodologies---redzones and low-fat pointers---in order to detect more memory errors that can be detected by each individual methodology alone. However, complementary error detection also inherits the limitations of each approach, such as false error detections from low-fat pointers. To mitigate this, we introduce a profile-based analysis that automatically determines the strongest memory error protection possible without negative side effects.We implement RedFat on top of a scalable binary rewriting framework, and demonstrate low overheads compared to the current state-of-the-art. We show RedFat to be language agnostic on C/C++/Fortran binaries with minimal requirements, and works with stripped binaries for both position independent/dependent code. We also show that the RedFat instrumentation can scale to very large/complex binaries, such as Google Chrome.},
+  booktitle = {Proceedings of the Seventeenth European Conference on Computer Systems (EuroSys)},
+  pages = {117–131},
+  numpages = {15},
+  keywords = {static binary rewriting, low-fat pointers, use-after-free, binary instrumentation, buffer overflows, memory errors, redzones, memory safety, binary hardening},
+  location = {Rennes, France},
+  series = {EuroSys22}
 }

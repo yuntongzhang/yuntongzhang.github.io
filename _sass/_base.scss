@@ -205,6 +205,16 @@ ul.task-list input[type="checkbox"] {
       margin: 0;
     }
   }
+
+  .email {
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-family: monospace;
+    p {
+      display: inline-block;
+      margin: 0;
+    }
+  }
 }
 
 .profile.float-right {
@@ -223,6 +233,9 @@ ul.task-list input[type="checkbox"] {
       p {
         display: block;
       }
+    }
+    .email {
+      p { display: block; }
     }
   }
 }
@@ -438,7 +451,7 @@ ul.task-list input[type="checkbox"] {
 footer.fixed-bottom {
   background-color: var(--global-footer-bg-color);
   font-size: 0.75rem;
-
+  text-align: center;
   .container {
     color: var(--global-footer-text-color);
     padding-top: 9px;
