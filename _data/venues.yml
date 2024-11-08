@@ -1,3 +1,11 @@
+"ICSE25":
+  url: https://conf.researchr.org/home/icse-2025
+  color: "#28eefa"
+
+"TOSEM25":
+  url: https://dl.acm.org/journal/tosem
+  color: "#005387"
+
 "ISSTA24":
   url: https://dl.acm.org/conference/issta
   color: "#45818e"

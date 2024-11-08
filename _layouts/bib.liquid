@@ -98,6 +98,11 @@
           {% endif %}
         {%- endif -%}
       {% endfor %}
+
+      {% if entry.author_note %}
+        <b>{{entry.author_note}}</b>
+      {% endif %}
+
       {%- assign more_authors = author_array_size | minus: author_array_limit -%}
 
       {%- assign more_authors_hide = more_authors | append: ' more author' -%}

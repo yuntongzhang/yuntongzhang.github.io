@@ -1,39 +1,39 @@
-"Gao":
+"gao":
   - firstname: ["Xiang", "X."]
     url: https://gaoxiang9430.github.io/index.html
 
-"Duck":
+"duck":
   - firstname: ["Gregory J.", "Gregory J"]
     url: https://www.comp.nus.edu.sg/~gregory/
 
-"Roychoudhury":
+"roychoudhury":
   - firstname: ["Abhik"]
     url: https://abhikrc.com/
 
-"Yap":
+"yap":
   - firstname: ["Roland H. C."]
     url: https://www.comp.nus.edu.sg/~ryap/
 
-"Ruan":
+"ruan":
   - firstname: ["Haifeng"]
     url: https://scholar.google.com/citations?user=h4ipIPoAAAAJ&hl=zh-CN
 
-"Fan":
+"fan":
   - firstname: ["Zhiyu"]
     url: https://zhiyufan.github.io/
 
-"Shariffdeen":
+"shariffdeen":
   - firstname: ["Ridwan"]
     url: https://rshariffdeen.com/
 
-"Tan":
+"tan":
   - firstname: ["Jiaqi"]
     url: https://tjiaqi.github.io/
 
-"Costea":
+"costea":
   - firstname: ["Andreea"]
-    url: https://www.comp.nus.edu.sg/~andreeac/
+    url: https://andrecostea.github.io/
 
-"McCall":
+"mccall":
   - firstname: ["Davin"]
     url: https://labs.oracle.com/pls/apex/f?p=94065:11:116541844650272:2821
