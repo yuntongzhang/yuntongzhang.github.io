@@ -693,9 +693,11 @@ footer.sticky-bottom {
   h2.bibliography {
     color: var(--global-divider-color);
     border-top: 1px solid var(--global-divider-color);
-    padding-top: 1rem;
-    margin-top: 2rem;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     text-align: right;
+    font-size: large;
   }
 
   ol.bibliography {
@@ -736,7 +738,13 @@ footer.sticky-bottom {
         font-weight: bolder;
       }
 
+      .periodical {
+        font-size: small;
+      }
+
       .author {
+        font-size: small;
+
         a {
           // border-bottom: 1px dashed var(--global-theme-color);
           color: black;
@@ -750,6 +758,7 @@ footer.sticky-bottom {
         > em {
           border-bottom: 1px solid;
           font-style: normal;
+          font-weight: normal;
         }
 
         > span.more-authors {
