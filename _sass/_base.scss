@@ -235,7 +235,9 @@ ul.task-list input[type="checkbox"] {
       }
     }
     .email {
-      p { display: block; }
+      p {
+        display: block;
+      }
     }
   }
 }
