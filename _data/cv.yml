@@ -22,9 +22,13 @@
 - title: Experience
   type: time_table
   contents:
+    - title: AI Researcher (part-time)
+      institution: SonarSource, Singapore
+      year: 2025.02 - Now
+
     - title: Research Intern
       institution: Oracle Labs, Australia (remote)
-      year: 2024.09 - Now
+      year: 2024.09 - 2024.12
 
     - title: Teaching Assistant
       institution: National University of Singapore, Singapore
