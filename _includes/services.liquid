@@ -1,0 +1,24 @@
+<div class="news">
+  {% if site.services != blank %}
+    {% assign services_size = site.services | size %}
+    <div class="table-responsive">
+      <table class="table table-sm table-borderless">
+        {% assign services = site.services | reverse %}
+        {% for item in services limit: services_size %}
+          <tr>
+            <th scope="row" style="width: 20%">{{ item.date | date: '%Y' }}</th>
+            <td>
+              <!-- {% if item.inline %} -->
+                {{ item.content | remove: '<p>' | remove: '</p>' | emojify }}
+              <!-- {% else %} -->
+                <!-- <a class="news-title" href="{{ item.url | relative_url }}">{{ item.title }}</a> -->
+              <!-- {% endif %} -->
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+    </div>
+  {% else %}
+    <p>No service detail available...</p>
+  {% endif %}
+</div>
