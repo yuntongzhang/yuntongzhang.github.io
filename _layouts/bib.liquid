@@ -100,7 +100,7 @@
       {% endfor %}
 
       {% if entry.author_note %}
-        <b>{{ entry.author_note }}</b>
+        <p style="margin-bottom: 0;"><b>{{ entry.author_note }}</b></p>
       {% endif %}
 
       {%- assign more_authors = author_array_size | minus: author_array_limit -%}

@@ -16,7 +16,7 @@
 
 "ruan":
   - firstname: ["Haifeng"]
-    url: https://scholar.google.com/citations?user=h4ipIPoAAAAJ&hl=zh-CN
+    url: https://haifengruan.com/
 
 "fan":
   - firstname: ["Zhiyu"]
@@ -37,3 +37,19 @@
 "mccall":
   - firstname: ["Davin"]
     url: https://labs.oracle.com/pls/apex/f?p=94065:11:116541844650272:2821
+
+"tan":
+  - firstname: ["Lin"]
+    url: https://www.cs.purdue.edu/homes/lintan/
+
+"applis":
+  - firstname: ["Leonhard"]
+    url: https://github.com/lapplislazuli
+
+"liang":
+  - firstname: ["Shanchao"]
+    url: https://shanchao-liang.com/
+
+"jiang":
+  - firstname: ["Nan"]
+    url: https://jiang719.github.io/
