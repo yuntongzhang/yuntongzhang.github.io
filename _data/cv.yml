@@ -63,13 +63,13 @@
   contents:
     - year: 2025
       items:
-        - <a href="https://credentials.nus.edu.sg/94a38902-ce0c-44e3-b25b-f261b6e5f32f#acc.1qnJuXpc">Dean's Graduate Research Excellence Award (NUS School of Computing).</a>
+        - <a href="https://credentials.nus.edu.sg/94a38902-ce0c-44e3-b25b-f261b6e5f32f#acc.1qnJuXpc">Dean's Graduate Research Excellence Award (NUS School of Computing).</a> <i>(Given to senior PhD students who have made significant research achievements during their PhD study.)</i>
     - year: 2022
       items:
-        - Research Achievement Award (NUS School of Computing).
+        - Research Achievement Award (NUS School of Computing). <i>(Given to PhD students who have achieved outstanding research performance over the past academic year.)</i>
     - year: 2021
       items:
-        - <a href="https://www.comp.nus.edu.sg/news/2021-five-graduates-win-ourp/">Outstanding Undergraduate Researcher Prize (NUS)</a>.
+        - <a href="https://www.comp.nus.edu.sg/news/2021-five-graduates-win-ourp/">Outstanding Undergraduate Researcher Prize (NUS)</a>. <i>(University-wide award that recognises outstanding undergraduate research across NUS.)</i>
 # - title: Academic Interests
 #   type: nested_list
 #   contents:
