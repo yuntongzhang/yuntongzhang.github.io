@@ -1,0 +1,679 @@
+:root {
+    --bg-color: #ffffff;
+    --text-primary: #111827; /* Gray-900 */
+    --text-secondary: #374151; /* Gray-700 */
+    --text-muted: #6b7280; /* Gray-500 */
+    --accent-color: #2563eb; /* Blue-600 */
+    --accent-hover: #1d4ed8; /* Blue-700 */
+    --border-color: #e5e7eb; /* Gray-200 */
+    --sidebar-bg: #f9fafb; /* Gray-50 */
+    --sidebar-width: 280px; /* Reduced further */
+    --section-gap: 3rem; /* Reduced spacing */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+    --note-bg: #f3f4f6;
+    --impact-bg: #eff6ff;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+[data-theme="dark"] {
+    --bg-color: #0f172a;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --accent-color: #60a5fa;
+    --accent-hover: #93c5fd;
+    --border-color: #334155;
+    --sidebar-bg: #1e293b;
+    --note-bg: #1e293b;
+    --impact-bg: rgba(96, 165, 250, 0.15);
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+}
+
+/* Reset & Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 15px; /* Slightly reduced base font size */
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    background-color: var(--bg-color);
+    line-height: 1.6; /* Reduced line-height */
+    display: flex;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 2.5rem 1.75rem; /* Reduced padding */
+    position: fixed;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.profile-section {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.profile-img {
+    width: 130px; /* Smaller image */
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 3px solid var(--bg-color);
+    box-shadow: var(--shadow-md);
+    transition: transform 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.02);
+}
+
+.profile-name {
+    font-family: var(--font-serif);
+    font-size: 1.4rem; /* Reduced size */
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+
+.profile-bio {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.profile-email a {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Navigation */
+.nav-links {
+    list-style: none;
+    margin-bottom: auto;
+    padding-left: 0.5rem;
+}
+
+.nav-links li {
+    margin-bottom: 0.4rem;
+}
+
+.nav-links a {
+    display: block;
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.95rem; /* Reduced size */
+    padding: 0.25rem 0;
+    position: relative;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--accent-color);
+    text-decoration: none;
+    padding-left: 0.5rem;
+}
+
+.nav-links a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 0;
+    background-color: var(--accent-color);
+    transition: height 0.2s ease;
+}
+
+.nav-links a:hover::before {
+    height: 60%;
+}
+
+.cv-link-subtle {
+    font-size: 0.9rem !important;
+    margin-top: 1.25rem;
+    color: var(--text-primary) !important;
+    opacity: 0.85;
+    border-top: 1px solid var(--border-color);
+    padding-top: 0.75rem !important;
+}
+
+/* Social & Theme */
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0.4rem;
+    align-self: center;
+    margin-bottom: 0.75rem;
+    transition: color 0.2s;
+}
+
+.theme-toggle:hover {
+    color: var(--accent-color);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.social-links a {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    transition: all 0.2s;
+}
+
+.social-links a:hover {
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 3rem 4rem; /* Significantly reduced padding */
+    flex: 1;
+    max-width: 950px;
+    width: 100%;
+}
+
+section:not(:last-of-type) {
+    margin-bottom: var(--section-gap);
+}
+
+section {
+    scroll-margin-top: 2rem;
+}
+
+/* Typography */
+h2 {
+    font-family: var(--font-serif);
+    font-size: 1.75rem; /* Reduced size */
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    position: relative;
+    letter-spacing: -0.02em;
+}
+
+h2::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 3.5rem;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.05rem; /* Reduced size */
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.4rem;
+}
+
+p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem; /* Reduced size */
+    color: var(--text-secondary);
+}
+
+/* --- Research Directions --- */
+.research-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Reduced gap */
+}
+
+.research-topic h4 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.research-topic h4 i {
+    color: var(--accent-color);
+    font-size: 0.95rem;
+    opacity: 0.9;
+}
+
+.research-sublist {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.research-sublist > li {
+    position: relative;
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    line-height: 1.55;
+    font-size: 0.95rem;
+}
+
+/* Main bullet: Simple filled circle */
+.research-sublist > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 5px;
+    height: 5px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+
+.research-sublist li strong {
+    color: var(--text-primary);
+    font-weight: 700;
+}
+
+/* Nested List Styling */
+.research-sublist ul {
+    list-style: none;
+    margin-top: 0.5rem;
+    padding-left: 0.5rem;
+}
+
+.research-sublist ul li {
+    position: relative;
+    padding-left: 1rem;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem; /* Smaller nested text */
+    color: var(--text-secondary);
+}
+
+/* Sub bullet: En dash */
+.research-sublist ul li::before {
+    content: "–";
+    position: absolute;
+    left: 0.15rem;
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+/* Impact Highlight overrides */
+.research-sublist ul li.impact-highlight {
+    margin-top: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.research-sublist ul li.impact-highlight::before {
+    display: none;
+}
+
+.impact-highlight {
+    background-color: var(--impact-bg);
+    border-left: 3px solid var(--accent-color);
+    padding: 0.6rem 1rem; /* Compact padding */
+    border-radius: 0 4px 4px 0;
+    font-size: 0.9rem;
+    color: var(--text-primary);
+}
+
+.paper-citation {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-left: 0.3rem;
+    text-decoration: none;
+    white-space: nowrap;
+    background-color: var(--bg-color);
+}
+
+/* --- Publications (Refined & Compact) --- */
+.pub-item {
+    display: flex;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    align-items: baseline;
+    border-bottom: 1px dashed var(--border-color);
+    padding-bottom: 1.5rem;
+}
+.pub-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.publisher-note {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    background-color: var(--note-bg);
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--border-color);
+}
+
+.venue-abbr {
+    min-width: 90px; /* Reduced width */
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-align: right;
+    color: var(--text-secondary);
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+    opacity: 0.9;
+}
+
+.pub-details {
+    flex: 1;
+}
+
+.pub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+    flex-wrap: wrap;
+}
+
+.pub-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.05rem; /* Reduced size */
+    color: var(--text-primary);
+    line-height: 1.4;
+}
+
+.pub-links {
+    display: flex;
+    gap: 0.4rem;
+    flex-shrink: 0;
+}
+
+/* Badge-style links */
+.pub-links a {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.1rem 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    color: var(--text-secondary);
+    background-color: transparent;
+    transition: all 0.2s;
+    text-decoration: none;
+}
+
+.pub-links a:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+    background-color: var(--bg-color);
+}
+
+.pub-authors {
+    color: var(--text-secondary);
+    font-size: 0.95rem; /* Reduced size */
+    margin-bottom: 0.25rem;
+    line-height: 1.5;
+}
+
+.pub-authors strong {
+    color: var(--text-primary);
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+}
+
+.pub-venue-full {
+    font-size: 0.85rem; /* Reduced size */
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 0.15rem;
+}
+
+.author-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+/* --- News & Talks (Clean List) --- */
+.news-list, .talk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem; /* Reduced gap */
+}
+
+.news-item, .talk-item {
+    display: grid;
+    grid-template-columns: 80px 1fr; /* Reduced column width */
+    gap: 1.25rem;
+    align-items: baseline;
+}
+
+.news-item .date, .talk-item .date {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+}
+
+.news-content {
+    font-size: 0.95rem; /* Reduced size */
+    color: var(--text-primary);
+    line-height: 1.55;
+}
+
+/* --- Services --- */
+.service-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Reduced gap */
+}
+
+.service-item {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+.service-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.service-label {
+    font-weight: 600;
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.service-details {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+}
+
+/* Footer (Class-based) */
+.site-footer {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem 0;
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 900px) {
+    body {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 2rem 1.5rem;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        text-align: center;
+    }
+    
+    .profile-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .profile-img {
+        width: 100px; /* Even smaller on mobile */
+        height: 100px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 2.5rem 1.5rem;
+        max-width: 100%;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        padding-left: 0;
+        margin-bottom: 1.5rem;
+    }
+
+    .nav-links li {
+        margin-bottom: 0;
+    }
+    
+    .nav-links a {
+        display: inline-block;
+        padding: 0.4rem;
+        font-size: 0.95rem;
+    }
+    .nav-links a:hover {
+        padding-left: 0.4rem;
+    }
+    .nav-links a::before {
+        display: none;
+    }
+
+    .cv-link-subtle {
+        margin-top: 0;
+        border-top: none;
+        padding-top: 0.4rem !important;
+    }
+
+    /* Stack publication and news items vertically on small screens */
+    .pub-item, .news-item, .talk-item, .service-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+    .venue-abbr, .news-item .date, .talk-item .date, .service-label {
+        text-align: left;
+        min-width: auto;
+        color: var(--accent-color);
+        font-size: 0.8rem;
+        margin-bottom: 0;
+    }
+    
+    .pub-header {
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+    
+    .service-item {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Badge Link for Impact Highlight */
+.badge-link {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.15rem 0.6rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 999px;
+    color: var(--accent-color);
+    background-color: var(--bg-color);
+    transition: all 0.2s;
+    text-decoration: none;
+    margin-left: 0.3rem;
+    white-space: nowrap;
+}
+
+.badge-link:hover {
+    background-color: var(--accent-color);
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.badge-link i {
+    margin-right: 0.2rem;
+}

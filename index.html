@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yuntong Zhang (张云彤)</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <!-- Academicons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css"
+    />
+  </head>
+  <body>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="profile-section">
+        <img
+          src="assets/img/profile_2024.jpg"
+          alt="Yuntong Zhang"
+          class="profile-img"
+        />
+        <div class="profile-name">Yuntong Zhang</div>
+        <div class="profile-bio">PhD Student @ NUS</div>
+        <div class="profile-email">
+          <a href="mailto:zhang.yuntong@u.nus.edu"
+            ><i class="fas fa-envelope"></i> zhang.yuntong@u.nus.edu</a
+          >
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#research">Research Directions</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#talks">Talks</a></li>
+        <li><a href="#services">Services</a></li>
+        <li>
+          <a href="assets/pdf/cv.pdf" class="cv-link-subtle"
+            ><i class="fas fa-file-pdf"></i> Curriculum Vitae</a
+          >
+        </li>
+      </ul>
+
+      <button
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="Toggle Dark Mode"
+      >
+        <i class="fas fa-moon"></i>
+      </button>
+
+      <div class="social-links">
+        <a href="mailto:zhang.yuntong@u.nus.edu" aria-label="Email"
+          ><i class="fas fa-envelope"></i
+        ></a>
+        <a
+          href="https://scholar.google.com/citations?user=3aKOLKEAAAAJ"
+          target="_blank"
+          aria-label="Google Scholar"
+          ><i class="ai ai-google-scholar"></i
+        ></a>
+        <a
+          href="https://github.com/yuntongzhang"
+          target="_blank"
+          aria-label="GitHub"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a
+          href="https://x.com/yuntongzh"
+          target="_blank"
+          aria-label="X (Twitter)"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a
+          href="https://linkedin.com/in/ytz"
+          target="_blank"
+          aria-label="LinkedIn"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- About Section -->
+      <section id="about">
+        <h2>About Me</h2>
+        <p>
+          I am a PhD student at the National University of Singapore (NUS),
+          where I am advised by Prof.
+          <a href="https://abhikrc.com/" target="_blank">Abhik Roychoudhury</a>.
+          My research focuses on
+          <strong>Autonomous Software Engineering</strong>, combining program
+          analysis with Large Language Models to build coding agents that are
+          effective, trustworthy, and secure. I also work on analysis-based
+          automated program repair and software security.
+        </p>
+        <p>
+          My research on the LLM agent
+          <a href="https://arxiv.org/pdf/2404.05427" target="_blank"
+            >AutoCodeRover</a
+          >
+          led to a startup spin-off on autonomous coding agents. Our startup was
+          later
+          <a
+            href="https://www.sonarsource.com/company/press-releases/sonar-acquires-autocoderover-to-supercharge-developers-with-ai-agents/"
+            target="_blank"
+            >acquired by Sonar</a
+          >
+          in 2025.
+        </p>
+      </section>
+
+      <!-- Research Directions Section -->
+
+      <section id="research">
+        <h2>Research Directions</h2>
+
+        <div class="research-list">
+          <div class="research-topic">
+            <h4>
+              <i class="fas fa-robot"></i> LLM Agents for Software Engineering
+            </h4>
+
+            <ul class="research-sublist">
+              <li>
+                <strong>AutoCodeRover</strong> agent for program improvement:
+
+                <ul>
+                  <li>
+                    Program analysis for code search (code structure-based
+                    search, statistical fault localization).
+                    <a href="#issta24" class="paper-citation">[ISSTA'24]</a>
+                  </li>
+
+                  <li>
+                    Improve signal-to-noise ratio of agent-generated code.
+                    <a href="#icse25" class="paper-citation">[ICSE'25]</a>
+                  </li>
+
+                  <li>
+                    Context enrichment through program analysis for
+                    vulnerability repair.
+                    <a href="#icse26-seip" class="paper-citation"
+                      >[ICSE'26-SEIP]</a
+                    >
+                  </li>
+
+                  <li class="impact-highlight">
+                    <strong>Research Impact:</strong> This research led to the
+                    founding of the startup
+                    <a
+                      href="https://www.linkedin.com/company/103643189/admin/dashboard/"
+                      target="_blank"
+                      style="font-weight: 700"
+                      >AutoCodeRover</a
+                    >, which was acquired by
+                    <a
+                      href="https://www.sonarsource.com/"
+                      target="_blank"
+                      style="font-weight: 700"
+                      >Sonar</a
+                    >.
+                    <span style="display: inline-block; margin-top: 0.25rem">
+                      <a
+                        href="https://www.sonarsource.com/company/press-releases/sonar-acquires-autocoderover-to-supercharge-developers-with-ai-agents/"
+                        class="badge-link"
+                        ><i class="fas fa-newspaper"></i> Press Release</a
+                      >
+                      <a
+                        href="https://www.forbes.com/sites/janakirammsv/2025/02/24/sonar-bets-on-ai-code-automation-with-autocoderover-acquisition/"
+                        class="badge-link"
+                        ><i class="fas fa-external-link-alt"></i> News</a
+                      >
+                    </span>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                General coding agent with software engineering grouded action
+                space. <a href="#icse26" class="paper-citation">[ICSE'26]</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="research-topic">
+            <h4><i class="fas fa-tools"></i> Automated Program Repair</h4>
+
+            <ul class="research-sublist">
+              <li>
+                Inferring patch constraints with dynamic analysis and inductive
+                inference.
+                <a href="#issta22" class="paper-citation">[ISSTA'22]</a>
+              </li>
+
+              <li>
+                Static analysis summaries to guide patch generation.
+                <a href="#tosem25" class="paper-citation">[TOSEM'25]</a>
+              </li>
+
+              <li>
+                Fuzzing-based search to explore the space of program patches.
+                <a href="#fuzzrepair" class="paper-citation">[arXiv]</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Publications Section -->
+      <section id="publications">
+        <h2>
+          Publications
+          <a
+            href="https://scholar.google.com/citations?user=3aKOLKEAAAAJ"
+            target="_blank"
+            class="title-link"
+            ><i class="ai ai-google-scholar"></i> Google Scholar</a
+          >
+        </h2>
+        <div class="publisher-note">
+          PDFs are for personal use only and not for redistribution.
+        </div>
+        <div class="pub-item" id="icse26">
+          <div class="venue-abbr">ICSE'26</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                Unified Software Engineering agent as AI Software Engineer
+              </div>
+              <div class="pub-links">
+                <a href="https://arxiv.org/pdf/2506.14683">PDF</a>
+                <a href="https://github.com/nus-apr/USEagent">Code</a>
+              </div>
+            </div>
+            <div class="pub-authors">
+              Leonhard Applis*, <strong>Yuntong Zhang*</strong>, Shanchao Liang,
+              Nan Jiang, Lin Tan, Abhik Roychoudhury
+            </div>
+            <div class="author-note">
+              (*Joint first authors, ordered alphabetically.)
+            </div>
+            <div class="pub-venue-full">
+              48th International Conference on Software Engineering (ICSE)
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-item" id="icse26-seip">
+          <div class="venue-abbr">ICSE'26-SEIP</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                Fixing Security Vulnerabilities with Agentic AI in OSS-Fuzz
+              </div>
+              <div class="pub-links">
+                <a href="assets/pdf/icse26-seip.pdf">PDF</a>
+              </div>
+            </div>
+            <div class="pub-authors">
+              <strong>Yuntong Zhang</strong>, Jiawei Wang, Dominic Berzin,
+              Martin Mirchev, Abhik Roychoudhury
+            </div>
+            <div class="pub-venue-full">
+              48th International Conference on Software Engineering (ICSE), SEIP
+              Track
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-item" id="icse25">
+          <div class="venue-abbr">ICSE'25</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                SpecRover: Code Intent Extraction via LLMs
+              </div>
+              <div class="pub-links">
+                <a href="https://arxiv.org/pdf/2408.02232">PDF</a>
+                <a href="https://github.com/AutoCodeRoverSG/auto-code-rover"
+                  >Code</a
+                >
+              </div>
+            </div>
+            <div class="pub-authors">
+              Haifeng Ruan*, <strong>Yuntong Zhang*</strong>, Abhik Roychoudhury
+            </div>
+            <div class="author-note">
+              (*Joint first authors, ordered alphabetically.)
+            </div>
+            <div class="pub-venue-full">
+              47th International Conference on Software Engineering (ICSE)
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-item" id="tosem25">
+          <div class="venue-abbr">TOSEM'25</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                EffFix: Efficient and Effective Repair of Pointer Manipulating
+                Programs
+              </div>
+              <div class="pub-links">
+                <a href="https://arxiv.org/abs/2308.00294">PDF</a>
+                <a href="https://github.com/nus-apr/EffFix">Code</a>
+              </div>
+            </div>
+            <div class="pub-authors">
+              <strong>Yuntong Zhang</strong>, Andreea Costea, Ridwan
+              Shariffdeen, Davin McCall, Abhik Roychoudhury
+            </div>
+            <div class="pub-venue-full">
+              ACM Transactions on Software Engineering and Methodology (TOSEM)
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-item" id="issta24">
+          <div class="venue-abbr">ISSTA'24</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                AutoCodeRover: Autonomous Program Improvement
+              </div>
+              <div class="pub-links">
+                <a href="https://arxiv.org/pdf/2404.05427">PDF</a>
+                <a href="https://github.com/nus-apr/auto-code-rover">Code</a>
+              </div>
+            </div>
+            <div class="pub-authors">
+              <strong>Yuntong Zhang</strong>, Haifeng Ruan, Zhiyu Fan, Abhik
+              Roychoudhury
+            </div>
+            <div class="pub-venue-full">
+              33rd ACM SIGSOFT International Symposium on Software Testing and
+              Analysis (ISSTA)
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-item" id="fuzzrepair">
+          <div class="venue-abbr">arXiv</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                Program Repair by Fuzzing over Patch and Input Space
+              </div>
+              <div class="pub-links">
+                <a href="https://arxiv.org/abs/2308.00666">PDF</a>
+              </div>
+            </div>
+            <div class="pub-authors">
+              <strong>Yuntong Zhang</strong>, Ridwan Shariffdeen, Gregory J
+              Duck, Jiaqi Tan, Abhik Roychoudhury
+            </div>
+            <div class="pub-venue-full">arXiv preprint (2023)</div>
+          </div>
+        </div>
+
+        <div class="pub-item" id="issta22">
+          <div class="venue-abbr">ISSTA'22</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                Program Vulnerability Repair via Inductive Inference
+              </div>
+              <div class="pub-links">
+                <a href="assets/pdf/vulnfix.pdf">PDF</a>
+                <a href="https://github.com/yuntongzhang/vulnfix">Code</a>
+              </div>
+            </div>
+            <div class="pub-authors">
+              <strong>Yuntong Zhang</strong>, Xiang Gao, Gregory J. Duck, Abhik
+              Roychoudhury
+            </div>
+            <div class="pub-venue-full">
+              31st ACM SIGSOFT International Symposium on Software Testing and
+              Analysis (ISSTA)
+            </div>
+          </div>
+        </div>
+
+        <div class="pub-item" id="eurosys22">
+          <div class="venue-abbr">EuroSys'22</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                Hardening Binaries against More Memory Errors
+              </div>
+              <div class="pub-links">
+                <a href="assets/pdf/redfat.pdf">PDF</a>
+                <a href="https://github.com/GJDuck/RedFat">Code</a>
+              </div>
+            </div>
+            <div class="pub-authors">
+              Gregory J. Duck, <strong>Yuntong Zhang</strong>, Roland H. C. Yap
+            </div>
+            <div class="pub-venue-full">
+              Seventeenth European Conference on Computer Systems (EuroSys)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Talks Section -->
+      <section id="talks">
+        <h2>Talks</h2>
+        <div class="talk-list">
+          <div class="talk-item">
+            <div class="date">Apr 2025</div>
+            <div class="news-content">
+              <strong>Columbia University COMS 6113:</strong> Invited talk on
+              Coding Agents in the PhD-level course Agentic Systems Made Real.
+            </div>
+          </div>
+          <div class="talk-item">
+            <div class="date">Jan 2025</div>
+            <div class="news-content">
+              <strong>Shonan Meeting 217:</strong> Trusted Automatic
+              Programming. Presented the latest development of the AutoCodeRover
+              agent.
+            </div>
+          </div>
+          <div class="talk-item">
+            <div class="date">Aug 2024</div>
+            <div class="news-content">
+              <strong>Microsoft Data&AI:</strong> Presented AutoCodeRover and
+              SpecRover.
+            </div>
+          </div>
+          <div class="talk-item">
+            <div class="date">May 2024</div>
+            <div class="news-content">
+              <strong>Machine Learning Singapore:</strong> Presented
+              AutoCodeRover at the Code and Vision meet Art and Efficiency
+              event.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section id="services">
+        <h2>Academic Services</h2>
+        <div class="service-list">
+          <div class="service-item">
+            <div class="service-label">Program Committee</div>
+            <div>
+              <div class="service-details">AIware 2026.</div>
+              <div class="service-details">
+                CodeMates workshop @ AAAI 2026.
+              </div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-label">Reviewer</div>
+            <div>
+              <div class="service-details">
+                IEEE Transactions on Software Engineering (TSE).
+              </div>
+              <div class="service-details">
+                ACM Transactions on Software Engineering and Methodology
+                (TOSEM).
+              </div>
+              <div class="service-details">
+                Empirical Software Engineering (EMSE).
+              </div>
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-label">Student Volunteer</div>
+            <div class="service-details">ESEC/FSE 2022.</div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>&copy; 2026 Yuntong Zhang. Last updated: Jan 2026.</p>
+      </footer>
+    </main>
+
+    <script>
+      const toggleButton = document.getElementById("theme-toggle");
+      const icon = toggleButton.querySelector("i");
+      const body = document.body;
+
+      // Check for saved user preference, if any, on load of the website
+      const currentTheme = localStorage.getItem("theme");
+      if (currentTheme) {
+        body.setAttribute("data-theme", currentTheme);
+        if (currentTheme === "dark") {
+          icon.classList.remove("fa-moon");
+          icon.classList.add("fa-sun");
+        }
+      }
+
+      toggleButton.addEventListener("click", function () {
+        if (body.getAttribute("data-theme") === "dark") {
+          body.removeAttribute("data-theme");
+          localStorage.setItem("theme", "light");
+          icon.classList.remove("fa-sun");
+          icon.classList.add("fa-moon");
+        } else {
+          body.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+          icon.classList.remove("fa-moon");
+          icon.classList.add("fa-sun");
+        }
+      });
+    </script>
+  </body>
+</html>
