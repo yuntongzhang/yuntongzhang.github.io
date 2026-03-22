@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap"
       rel="stylesheet"
     />
     <!-- Font Awesome -->
@@ -24,8 +24,13 @@
     />
   </head>
   <body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+
     <!-- Sidebar -->
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
       <div class="profile-section">
         <img
           src="assets/img/profile_2024.jpg"
@@ -42,14 +47,14 @@
       </div>
 
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#research">Research Directions</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#talks">Talks</a></li>
-        <li><a href="#services">Services</a></li>
+        <li><a href="#about" data-section="about">About</a></li>
+        <li><a href="#research" data-section="research">Research</a></li>
+        <li><a href="#publications" data-section="publications">Publications</a></li>
+        <li><a href="#talks" data-section="talks">Talks</a></li>
+        <li><a href="#services" data-section="services">Services</a></li>
         <li>
           <a href="assets/pdf/cv.pdf" class="cv-link-subtle"
-            ><i class="fas fa-file-pdf"></i> Curriculum Vitae</a
+            ><i class="fas fa-file-pdf"></i> CV</a
           >
         </li>
       </ul>
@@ -96,8 +101,8 @@
     <!-- Main Content -->
     <main class="main-content">
       <!-- About Section -->
-      <section id="about">
-        <h2>About Me</h2>
+      <section id="about" class="reveal">
+        <h2><span class="n">01</span>About Me</h2>
         <p>
           I am a PhD student at the National University of Singapore (NUS),
           where I am advised by Prof.
@@ -125,15 +130,12 @@
       </section>
 
       <!-- Research Directions Section -->
+      <section id="research" class="reveal">
+        <h2><span class="n">02</span>Research Directions</h2>
 
-      <section id="research">
-        <h2>Research Directions</h2>
-
-        <div class="research-list">
+        <div class="research-list stagger">
           <div class="research-topic">
-            <h4>
-              <i class="fas fa-robot"></i> LLM Agents for Software Engineering
-            </h4>
+            <h4>LLM Agents for Software Engineering</h4>
 
             <ul class="research-sublist">
               <li>
@@ -198,7 +200,7 @@
           </div>
 
           <div class="research-topic">
-            <h4><i class="fas fa-tools"></i> Automated Program Repair</h4>
+            <h4>Automated Program Repair</h4>
 
             <ul class="research-sublist">
               <li>
@@ -222,9 +224,9 @@
       </section>
 
       <!-- Publications Section -->
-      <section id="publications">
+      <section id="publications" class="reveal">
         <h2>
-          Publications
+          <span class="n">03</span>Publications
           <a
             href="https://scholar.google.com/citations?user=3aKOLKEAAAAJ"
             target="_blank"
@@ -235,6 +237,7 @@
         <div class="publisher-note">
           PDFs are for personal use only and not for redistribution.
         </div>
+        <div class="stagger">
         <div class="pub-item" id="icse26">
           <div class="venue-abbr">ICSE'26</div>
           <div class="pub-details">
@@ -416,12 +419,13 @@
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       <!-- Talks Section -->
-      <section id="talks">
-        <h2>Talks</h2>
-        <div class="talk-list">
+      <section id="talks" class="reveal">
+        <h2><span class="n">04</span>Talks</h2>
+        <div class="talk-list stagger">
           <div class="talk-item">
             <div class="date">Apr 2025</div>
             <div class="news-content">
@@ -456,9 +460,9 @@
       </section>
 
       <!-- Services Section -->
-      <section id="services">
-        <h2>Academic Services</h2>
-        <div class="service-list">
+      <section id="services" class="reveal">
+        <h2><span class="n">05</span>Academic Services</h2>
+        <div class="service-list stagger">
           <div class="service-item">
             <div class="service-label">Program Committee</div>
             <div>
@@ -496,11 +500,11 @@
     </main>
 
     <script>
+      // Theme toggle
       const toggleButton = document.getElementById("theme-toggle");
       const icon = toggleButton.querySelector("i");
       const body = document.body;
 
-      // Check for saved user preference, if any, on load of the website
       const currentTheme = localStorage.getItem("theme");
       if (currentTheme) {
         body.setAttribute("data-theme", currentTheme);
@@ -523,6 +527,61 @@
           icon.classList.add("fa-sun");
         }
       });
+
+      // Mobile menu
+      const menuToggle = document.getElementById("menu-toggle");
+      const sidebar = document.getElementById("sidebar");
+      const menuIcon = menuToggle.querySelector("i");
+
+      menuToggle.addEventListener("click", function () {
+        sidebar.classList.toggle("menu-open");
+        menuIcon.classList.toggle("fa-bars");
+        menuIcon.classList.toggle("fa-times");
+      });
+
+      document.querySelectorAll(".nav-links a").forEach(function (link) {
+        link.addEventListener("click", function () {
+          sidebar.classList.remove("menu-open");
+          menuIcon.classList.add("fa-bars");
+          menuIcon.classList.remove("fa-times");
+        });
+      });
+
+      // Scroll reveal — low threshold so bottom sections trigger reliably
+      var revealObs = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) e.target.classList.add("visible");
+          });
+        },
+        { threshold: 0.01 }
+      );
+
+      document.querySelectorAll(".reveal, .stagger").forEach(function (el) {
+        revealObs.observe(el);
+      });
+
+      // Active nav tracking
+      var sections = document.querySelectorAll("section[id]");
+      var navLinks = document.querySelectorAll(".nav-links a[data-section]");
+
+      var navObs = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              navLinks.forEach(function (l) {
+                l.classList.toggle(
+                  "active",
+                  l.getAttribute("data-section") === e.target.id
+                );
+              });
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "-60px 0px -40% 0px" }
+      );
+
+      sections.forEach(function (s) { navObs.observe(s); });
     </script>
   </body>
 </html>
