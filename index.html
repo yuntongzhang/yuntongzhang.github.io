@@ -161,6 +161,15 @@
                     >
                   </li>
 
+                  <li>
+                    AutoCodeRover technology transfer:
+                    integration with SonarQube and deployment
+                    on real-world codebases.
+                    <a href="#fse26-industry" class="paper-citation"
+                      >[FSE'26-Industry]</a
+                    >
+                  </li>
+
                   <li class="impact-highlight">
                     <strong>Research Impact:</strong> This research led to the
                     founding of the startup
@@ -193,8 +202,8 @@
               </li>
 
               <li>
-                General coding agent with software engineering grouded action
-                space. <a href="#icse26" class="paper-citation">[ICSE'26]</a>
+                General coding agent with software engineering grounded
+                action space. <a href="#icse26" class="paper-citation">[ICSE'26]</a>
               </li>
             </ul>
           </div>
@@ -238,6 +247,24 @@
           PDFs are for personal use only and not for redistribution.
         </div>
         <div class="stagger">
+
+        <div class="pub-item" id="fse26-industry">
+          <div class="venue-abbr">FSE'26-Industry</div>
+          <div class="pub-details">
+            <div class="pub-header">
+              <div class="pub-title">
+                AutoCodeRover: Agentic Program Repair for SonarQube Issues
+              </div>
+            </div>
+            <div class="pub-authors">
+              Martin Mirchev, Ridwan Shariffdeen, Haifeng Ruan, <strong>Yuntong Zhang</strong>, Abhik Roychoudhury
+            </div>
+            <div class="pub-venue-full">
+              34th ACM International Conference on Foundations of Software Engineering (FSE), Industry Track
+            </div>
+          </div>
+        </div>
+
         <div class="pub-item" id="icse26">
           <div class="venue-abbr">ICSE'26</div>
           <div class="pub-details">
@@ -444,7 +471,7 @@
           <div class="talk-item">
             <div class="date">Aug 2024</div>
             <div class="news-content">
-              <strong>Microsoft Data&AI:</strong> Presented AutoCodeRover and
+              <strong>Microsoft Data &amp; AI:</strong> Presented AutoCodeRover and
               SpecRover.
             </div>
           </div>
@@ -495,7 +522,7 @@
       </section>
 
       <footer class="site-footer">
-        <p>&copy; 2026 Yuntong Zhang. Last updated: Jan 2026.</p>
+        <p>&copy; 2026 Yuntong Zhang. Last updated: Mar 2026.</p>
       </footer>
     </main>
 
@@ -582,6 +609,23 @@
       );
 
       sections.forEach(function (s) { navObs.observe(s); });
+
+      // When scrolled to the bottom, activate the last nav link
+      var mainContent = document.querySelector(".main-content");
+      mainContent.addEventListener("scroll", function () {
+        if (mainContent.scrollTop + mainContent.clientHeight >= mainContent.scrollHeight - 2) {
+          navLinks.forEach(function (l) {
+            l.classList.toggle("active", l.getAttribute("data-section") === "services");
+          });
+        }
+      });
+      window.addEventListener("scroll", function () {
+        if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+          navLinks.forEach(function (l) {
+            l.classList.toggle("active", l.getAttribute("data-section") === "services");
+          });
+        }
+      });
     </script>
   </body>
 </html>
