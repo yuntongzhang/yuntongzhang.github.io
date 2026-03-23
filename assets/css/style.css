@@ -294,6 +294,13 @@ a:hover { color: var(--accent-hover); }
     z-index: 1;
 }
 
+/* Center content in the space right of the sidebar on wide screens */
+@media (min-width: 1200px) {
+    .main-content {
+        margin-left: max(var(--sidebar-w), calc((100vw + var(--sidebar-w)) / 2 - 440px));
+    }
+}
+
 section:not(:last-of-type) { margin-bottom: var(--gap); }
 section { scroll-margin-top: 2rem; }
 
